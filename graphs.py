@@ -18,17 +18,17 @@ def trend(temp, rel, spec, levels, title):
     fig, ax = plt.subplots(1, 3, figsize=(20, 10))
     fig.suptitle(title, fontsize=suptitle_size)
 
-    ax[0].semilogy(fn.get_trend(temp), levels)
+    ax[0].semilogy(fn.get_trend(temp, levels), levels)
     ax[0].invert_yaxis()
     ax[0].axvline(0, color=dashed_line_color, linestyle="dashed")
     # ax[0].set_xlim(-4, 4)
 
-    ax[1].semilogy(fn.get_trend(rel), levels)
+    ax[1].semilogy(fn.get_trend(rel, levels), levels)
     ax[1].invert_yaxis()
     ax[1].axvline(0, color=dashed_line_color, linestyle="dashed")
     # ax[1].set_xlim(-1, 1)
 
-    ax[2].semilogy(fn.get_trend(spec), levels)
+    ax[2].semilogy(fn.get_trend(spec, levels), levels)
     ax[2].invert_yaxis()
     ax[2].axvline(0, color=dashed_line_color, linestyle="dashed")
 
@@ -69,5 +69,5 @@ def hovmoeller(values, levels, cmap_levels, cmap_label, title):
     ax.set_ylabel("Tlak [hPa]", fontsize=label_size)
 
     contour = ax.contourf(X, Y, fn.get_anomalies_by_year_and_level(
-        values), cmap=plt.get_cmap("RdBu").reversed(), levels=cmap_levels)
+        values, levels), cmap=plt.get_cmap("RdBu").reversed(), levels=cmap_levels)
     fig.colorbar(contour, label=cmap_label)

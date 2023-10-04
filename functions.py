@@ -1,13 +1,8 @@
 import numpy as np
-import netCDF4 as nc
 from sklearn.linear_model import LinearRegression
 
-file = nc.Dataset('data/zg_temp_00.nc', 'r')
-levels = file.variables["level"][:].data
-file.close()
 
-
-def get_climatology_by_level(values):
+def get_climatology_by_level(values, levels):
     climatology_by_level = []
 
     for level in range(len(levels)):
@@ -20,7 +15,7 @@ def get_climatology_by_level(values):
     return climatology_by_level
 
 
-def get_trend(values):
+def get_trend(values, levels):
     trend_by_level = []
     for level in range(len(levels)):
 
@@ -48,9 +43,9 @@ def get_trend(values):
     return trend_by_level
 
 
-def get_averaged_differences(values):
+def get_averaged_differences(values, levels):
     slopes = []
-    climatology_by_level = get_climatology_by_level(values)
+    climatology_by_level = get_climatology_by_level(values, levels)
 
     for level in range(len(levels)):
 
@@ -76,9 +71,9 @@ def get_averaged_differences(values):
     return slopes
 
 
-def get_anomalies_by_year_and_level(values):
+def get_anomalies_by_year_and_level(values, levels):
 
-    climatology_by_level = get_climatology_by_level(values)
+    climatology_by_level = get_climatology_by_level(values, levels)
     anomalies_by_level = []
 
     for level in range(len(levels)):
