@@ -27,7 +27,7 @@ def get_trend(values, levels):
             sum += values[time_step][level][0][0]
 
             if (time_step < 12 and counter == 11 or time_step > 12 and counter == 12):
-                averages_by_year.append(sum/12)
+                averages_by_year.append(sum)
                 sum = 0
                 counter = 0
             counter += 1
@@ -38,7 +38,7 @@ def get_trend(values, levels):
             differences.append(
                 averages_by_year[year + 1] - averages_by_year[year])
 
-        trend_by_level.append(np.sum(differences))
+        trend_by_level.append(np.mean(differences))
 
     return trend_by_level
 
