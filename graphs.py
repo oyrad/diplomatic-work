@@ -33,15 +33,15 @@ def trend(temp, rel, spec, levels, title):
     ax[2].axvline(0, color=dashed_line_color, linestyle="dashed")
 
     ax[0].set_title("Temperatura", fontsize=title_size)
-    ax[0].set_xlabel(r"Promjena [$^{\circ}$ C]", fontsize=label_size)
+    ax[0].set_xlabel(r"Trend [$^{\circ}$ C / 10 god]", fontsize=label_size)
     ax[0].set_ylabel("Tlak [hPa]", fontsize=label_size)
 
     ax[1].set_title("Relativna vlažnost", fontsize=title_size)
-    ax[1].set_xlabel(r"Promjena [$\%$]", fontsize=label_size)
+    ax[1].set_xlabel(r"Trend [$\%$]", fontsize=label_size)
     ax[1].set_ylabel("Tlak [hPa]", fontsize=label_size)
 
     ax[2].set_title("Specifična vlažnost", fontsize=title_size)
-    ax[2].set_xlabel(r"Promjena [$g/kg$]", fontsize=label_size)
+    ax[2].set_xlabel(r"Trend [$g/kg$]", fontsize=label_size)
     ax[2].set_ylabel("Tlak [hPa]", fontsize=label_size)
 
 
