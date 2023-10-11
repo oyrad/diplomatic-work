@@ -20,12 +20,10 @@ def trend(temp, rel, spec, levels, title):
     ax[0].semilogy(fn.get_trend(temp, levels), levels)
     ax[0].invert_yaxis()
     ax[0].axvline(0, color=dashed_line_color, linestyle="dashed")
-    # ax[0].set_xlim(-4, 4)
 
     ax[1].semilogy(fn.get_trend(rel, levels), levels)
     ax[1].invert_yaxis()
     ax[1].axvline(0, color=dashed_line_color, linestyle="dashed")
-    # ax[1].set_xlim(-1, 1)
 
     ax[2].semilogy(fn.get_trend(spec, levels), levels)
     ax[2].invert_yaxis()
