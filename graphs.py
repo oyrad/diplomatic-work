@@ -12,7 +12,6 @@ end_year = 2023
 
 
 def trend(temp, rel, spec, levels, title):
-
     dashed_line_color = "#888"
 
     fig, ax = plt.subplots(1, 3, figsize=(20, 10))
@@ -37,11 +36,11 @@ def trend(temp, rel, spec, levels, title):
     ax[0].set_ylabel("Tlak [hPa]", fontsize=label_size)
 
     ax[1].set_title("Relativna vlažnost", fontsize=title_size)
-    ax[1].set_xlabel(r"Trend [$\%$]", fontsize=label_size)
+    ax[1].set_xlabel(r"Trend [$\%$ / 10 god]", fontsize=label_size)
     ax[1].set_ylabel("Tlak [hPa]", fontsize=label_size)
 
     ax[2].set_title("Specifična vlažnost", fontsize=title_size)
-    ax[2].set_xlabel(r"Trend [$g/kg$]", fontsize=label_size)
+    ax[2].set_xlabel(r"Trend [gkg$^{-1}$ / 10 god]", fontsize=label_size)
     ax[2].set_ylabel("Tlak [hPa]", fontsize=label_size)
 
 
@@ -68,6 +67,12 @@ def hovmoeller(values, levels, cmap_levels, cmap_label, title):
     ax.set_xlabel("Godina", fontsize=label_size)
     ax.set_ylabel("Tlak [hPa]", fontsize=label_size)
 
-    contour = ax.contourf(X, Y, fn.get_anomalies_by_year_and_level(
-        values, levels), cmap=plt.get_cmap("RdBu").reversed(), levels=cmap_levels)
+    contour = ax.contourf(
+        X,
+        Y,
+        fn.get_anomalies_by_year_and_level(values, levels),
+        cmap=plt.get_cmap("RdBu").reversed(),
+        levels=cmap_levels,
+        extend="both",
+    )
     fig.colorbar(contour, label=cmap_label)
