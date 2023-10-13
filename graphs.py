@@ -28,6 +28,10 @@ def trend(temp, rel, spec, levels, title, season="none"):
     ax[2].set_title("Specifična vlažnost", fontsize=title_size)
     ax[2].set_xlabel(r"Trend [gkg$^{-1}$ / 10 god]", fontsize=label_size)
 
+    ax[0].set_xlim(-1.75, 0.5)
+    ax[1].set_xlim(-1, 1)
+    ax[2].set_xlim(-0.05, 0.25)
+
     for i in range(3):
         ax[i].invert_yaxis()
         ax[i].axvline(0, color="#888", linestyle="dashed")
