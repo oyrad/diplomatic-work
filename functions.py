@@ -14,7 +14,8 @@ def get_climatology_by_level(values, levels, season):
                     util.get_average_or_single_value(values, time_step, level)
                 )
             else:
-                value = util.get_seasonal_value(values, time_step, level, season)
+                value = util.get_seasonal_value(
+                    values, time_step, level, season)
                 if value:
                     current_values.append(value)
 
@@ -24,13 +25,13 @@ def get_climatology_by_level(values, levels, season):
 
 
 def get_trend(values, levels, season="none"):
-    anomalies_by_level = []
     climatology_by_level = get_climatology_by_level(values, levels, season)
+    anomalies_by_level = []
 
     for level in range(len(levels)):
         anomalies_by_year = []
         current_values = []
-        counter = 0
+        month = 1
 
         for time_step in range(996):
             if season == "none":
@@ -38,18 +39,27 @@ def get_trend(values, levels, season="none"):
                     util.get_average_or_single_value(values, time_step, level)
                 )
             else:
-                value = util.get_seasonal_value(values, time_step, level, season)
+                value = util.get_seasonal_value(
+                    values, time_step, level, season)
                 if value:
                     current_values.append(value)
 
-            if time_step < 12 and counter == 11 or time_step > 12 and counter == 12:
-                anomalies_by_year.append(
-                    np.mean(current_values) - climatology_by_level[level]
-                )
-                current_values = []
-                counter = 0
+            if season == "DJF":
+                if time_step < 12 and month == 10 or time_step > 12 and month == 12:
+                    anomalies_by_year.append(
+                        np.mean(current_values) - climatology_by_level[level]
+                    )
+                    current_values = []
+                    month = 0
+            else:
+                if month == 12:
+                    anomalies_by_year.append(
+                        np.mean(current_values) - climatology_by_level[level]
+                    )
+                    current_values = []
+                    month = 0
 
-            counter += 1
+            month += 1
 
         years = np.arange(1940, 2023, 1).reshape(-1, 1)
 
@@ -66,7 +76,7 @@ def get_anomalies_by_year_and_level(values, levels, season):
     for level in range(len(levels)):
         anomalies_by_year = []
         current_values = []
-        counter = 0
+        month = 1
 
         for time_step in range(996):
             if season == "none":
@@ -74,18 +84,27 @@ def get_anomalies_by_year_and_level(values, levels, season):
                     util.get_average_or_single_value(values, time_step, level)
                 )
             else:
-                value = util.get_seasonal_value(values, time_step, level, season)
+                value = util.get_seasonal_value(
+                    values, time_step, level, season)
                 if value:
                     current_values.append(value)
 
-            if time_step < 12 and counter == 11 or time_step > 12 and counter == 12:
-                anomalies_by_year.append(
-                    np.mean(current_values) - climatology_by_level[level]
-                )
-                current_values = []
-                counter = 0
+            if season == "DJF":
+                if time_step < 12 and month == 10 or time_step > 12 and month == 12:
+                    anomalies_by_year.append(
+                        np.mean(current_values) - climatology_by_level[level]
+                    )
+                    current_values = []
+                    month = 0
+            else:
+                if month == 12:
+                    anomalies_by_year.append(
+                        np.mean(current_values) - climatology_by_level[level]
+                    )
+                    current_values = []
+                    month = 0
 
-            counter += 1
+            month += 1
 
         anomalies_by_level.append(anomalies_by_year)
 
