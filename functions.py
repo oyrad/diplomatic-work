@@ -26,7 +26,6 @@ def get_climatology_by_level(values, levels, season):
 def get_anomalies_by_year(values, level, climatology_by_level, season):
     anomalies_by_year = []
     current_values = []
-    month = 1
 
     for time_step in range(996):
         if season == "none":
@@ -38,22 +37,13 @@ def get_anomalies_by_year(values, level, climatology_by_level, season):
             if value:
                 current_values.append(value)
 
-        if season == "DJF":
-            if (time_step < 12 and month == 10) or (time_step > 12 and month == 12):
-                anomalies_by_year.append(
-                    np.mean(current_values) - climatology_by_level[level]
-                )
-                current_values = []
-                month = 0
-        else:
-            if month == 12:
-                anomalies_by_year.append(
-                    np.mean(current_values) - climatology_by_level[level]
-                )
-                current_values = []
-                month = 0
-
-        month += 1
+        if (season == "DJF" and time_step % 12 == 9) or (
+            season != "DJF" and time_step % 12 == 11
+        ):
+            anomalies_by_year.append(
+                np.mean(current_values) - climatology_by_level[level]
+            )
+            current_values = []
 
     return anomalies_by_year
 
