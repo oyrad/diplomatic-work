@@ -1,7 +1,7 @@
 import numpy as np
 import util
 from sklearn.linear_model import LinearRegression
-from scipy.stats import stats
+import statsmodels.api as sm
 
 
 def get_climatology_by_level(values, levels, season):
@@ -15,7 +15,8 @@ def get_climatology_by_level(values, levels, season):
                     util.get_average_or_single_value(values, time_step, level)
                 )
             else:
-                value = util.get_seasonal_value(values, time_step, level, season)
+                value = util.get_seasonal_value(
+                    values, time_step, level, season)
                 if value:
                     current_values.append(value)
 
@@ -52,7 +53,6 @@ def get_anomalies_by_year(values, level, climatology_by_level, season):
 def get_trend(values, levels, season):
     climatology_by_level = get_climatology_by_level(values, levels, season)
     trend_by_level = []
-    ttest_pvalues = []
 
     for level in range(len(levels)):
         anomalies_by_year = get_anomalies_by_year(
@@ -63,12 +63,7 @@ def get_trend(values, levels, season):
         model = LinearRegression().fit(years, anomalies_by_year)
         trend_by_level.append(model.coef_ * 10)
 
-        ttest = stats.ttest_1samp(anomalies_by_year, 0)
-        ttest_pvalues.append(ttest.pvalue)
-
-        print(np.mean(anomalies_by_year))
-
-    return trend_by_level, ttest_pvalues
+    return trend_by_level
 
 
 def get_anomalies_by_year_and_level(values, levels, season):
@@ -81,3 +76,22 @@ def get_anomalies_by_year_and_level(values, levels, season):
         )
 
     return anomalies_by_level
+
+
+def get_ttest(values, levels, season):
+    climatology_by_level = get_climatology_by_level(values, levels, season)
+    pvalue_by_level = []
+
+    for level in range(len(levels)):
+        anomalies_by_year = get_anomalies_by_year(
+            values, level, climatology_by_level, season)
+
+        years = np.arange(1940, 2023, 1).reshape(-1, 1)
+
+        X = sm.add_constant(years)
+        model = sm.OLS(anomalies_by_year, X)
+        results = model.fit()
+
+        pvalue_by_level.append(results.pvalues[1])
+
+    return pvalue_by_level
