@@ -1,6 +1,7 @@
 import numpy as np
 import util
 from sklearn.linear_model import LinearRegression
+from scipy.stats import stats
 
 
 def get_climatology_by_level(values, levels, season):
@@ -51,6 +52,7 @@ def get_anomalies_by_year(values, level, climatology_by_level, season):
 def get_trend(values, levels, season):
     climatology_by_level = get_climatology_by_level(values, levels, season)
     trend_by_level = []
+    ttest_pvalues = []
 
     for level in range(len(levels)):
         anomalies_by_year = get_anomalies_by_year(
@@ -58,11 +60,15 @@ def get_trend(values, levels, season):
         )
 
         years = np.arange(1940, 2023, 1).reshape(-1, 1)
-
         model = LinearRegression().fit(years, anomalies_by_year)
         trend_by_level.append(model.coef_ * 10)
 
-    return trend_by_level
+        ttest = stats.ttest_1samp(anomalies_by_year, 0)
+        ttest_pvalues.append(ttest.pvalue)
+
+        print(np.mean(anomalies_by_year))
+
+    return trend_by_level, ttest_pvalues
 
 
 def get_anomalies_by_year_and_level(values, levels, season):
