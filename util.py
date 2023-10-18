@@ -14,8 +14,52 @@ def load_data(file_path, variable):
     return values
 
 
+def read_sounding_file(sondage_file):
+    with open(sondage_file, 'r') as file:
+        pressure = []
+        temperature = []
+        relative_humidity = []
+        specific_humidity = []
+
+        for _ in range(5):
+            next(file)
+
+        current_date_pressure = []
+        current_date_temperature = []
+        current_date_relative_humidity = []
+        current_date_specific_humidity = []
+
+        for line in file:
+
+            columns = line.split()
+            if (columns[0] == "PRES" or columns[0] == "Description"):
+                pressure.append(current_date_pressure)
+                temperature.append(current_date_temperature)
+                relative_humidity.append(current_date_relative_humidity)
+                specific_humidity.append(current_date_specific_humidity)
+
+                current_date_pressure = []
+                current_date_temperature = []
+                current_date_relative_humidity = []
+                current_date_specific_humidity = []
+
+                continue
+
+            if (columns[0] == "hPa"):
+                continue
+
+            if len(columns) >= 10:
+                current_date_pressure.append(float(columns[0]))
+                current_date_temperature.append(float(columns[2]))
+                current_date_relative_humidity.append(int(columns[4]))
+                current_date_specific_humidity.append(float(columns[5]))
+
+    return pressure, temperature, relative_humidity, specific_humidity
+
+
 def get_average_value(values, time_step, level):
-    return (values[0][time_step][level][0][0] + values[1][time_step][level][0][0]) / 2
+    values_00, values_12 = values
+    return ((values_00[time_step][level][0][0] + values_12[time_step][level][0][0]) / 2)
 
 
 def get_average_or_single_value(values, time_step, level):
