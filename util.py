@@ -1,4 +1,5 @@
 import netCDF4 as nc
+import numpy as np
 
 
 def load_data(file_path, variable):
@@ -15,51 +16,43 @@ def load_data(file_path, variable):
 
 
 def read_sounding_file(sondage_file):
-    with open(sondage_file, 'r') as file:
-        pressure = []
+    with open(sondage_file, "r") as file:
         temperature = []
         relative_humidity = []
-        specific_humidity = []
+        target_pressure = "850.0"
 
         for _ in range(5):
             next(file)
 
-        current_date_pressure = []
         current_date_temperature = []
         current_date_relative_humidity = []
-        current_date_specific_humidity = []
 
         for line in file:
-
             columns = line.split()
-            if (columns[0] == "PRES" or columns[0] == "Description"):
-                pressure.append(current_date_pressure)
-                temperature.append(current_date_temperature)
-                relative_humidity.append(current_date_relative_humidity)
-                specific_humidity.append(current_date_specific_humidity)
 
-                current_date_pressure = []
+            if len(columns) < 8:
+                continue
+
+            if columns[0] == "PRES" or columns[0] == "hpa":
+                continue
+
+            if columns[0] == "Description":
+                temperature.append(np.mean(current_date_temperature))
+                relative_humidity.append(np.mean(current_date_relative_humidity))
+
                 current_date_temperature = []
                 current_date_relative_humidity = []
-                current_date_specific_humidity = []
 
-                continue
-
-            if (columns[0] == "hPa"):
-                continue
-
-            if len(columns) >= 10:
-                current_date_pressure.append(float(columns[0]))
+            if columns[0] == target_pressure:
                 current_date_temperature.append(float(columns[2]))
-                current_date_relative_humidity.append(int(columns[4]))
-                current_date_specific_humidity.append(float(columns[5]))
+                current_date_relative_humidity.append(float(columns[4]))
 
-    return pressure, temperature, relative_humidity, specific_humidity
+    return temperature, relative_humidity
 
 
 def get_average_value(values, time_step, level):
     values_00, values_12 = values
-    return ((values_00[time_step][level][0][0] + values_12[time_step][level][0][0]) / 2)
+    return (values_00[time_step][level][0][0] + values_12[time_step][level][0][0]) / 2
 
 
 def get_average_or_single_value(values, time_step, level):
