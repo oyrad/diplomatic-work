@@ -4,14 +4,19 @@ from sklearn.linear_model import LinearRegression
 import statsmodels.api as sm
 
 
-def get_mean_values_by_level(values, levels):
+def get_mean_values_by_level(values, levels, season):
     era5_mean = []
 
     for level in range(len(levels)):
         current_values = []
 
         for time_step in range(852, 972):
-            current_values.append(util.get_average_or_single_value(values, time_step, level))
+            if season == "none":
+                current_values.append(util.get_average_or_single_value(values, time_step, level))
+            else:
+                value = util.get_seasonal_value(values, time_step, level, season)
+                if value:
+                    current_values.append(value)
 
         era5_mean.append(np.mean(current_values))
 

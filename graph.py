@@ -141,11 +141,11 @@ def comparison(era5_temp, era5_rel, real_temp, real_rel):
     ax[1].set_title("Relativna vlažnost", fontsize=title_size)
 
 
-def profile_comparison(sondage_file, temp, rel, levels, title):
+def profile_comparison(sondage_file, temp, rel, levels, title, season="none"):
     all_pressure_levels = np.linspace(10, 1000, 500)
     real_temp, real_rel = fn.get_sounding_values_by_level(sondage_file, all_pressure_levels)
-    era5_temp = fn.get_mean_values_by_level(temp, levels)
-    era5_rel = fn.get_mean_values_by_level(rel, levels)
+    era5_temp = fn.get_mean_values_by_level(temp, levels, season)
+    era5_rel = fn.get_mean_values_by_level(rel, levels, season)
 
     fig, ax = plt.subplots(1, 2, figsize=(20, 12))
     fig.suptitle(title, fontsize=suptitle_size)

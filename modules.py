@@ -381,3 +381,23 @@ def profile_comparison(zg_temp_00, zg_temp_12, zg_rel_00, zg_rel_12, zd_temp_00,
     graph.profile_comparison("data/soundings/zg.txt", [zg_temp_00, zg_temp_12], [zg_rel_00, zg_rel_12], levels, title="Usporedba profila stvarnih vrijednosti i ERA5, Zagreb, 2011. - 2020.")
     plt.savefig("profile_comparison_zg_mean.png", facecolor='white', transparent=False)
     plt.close()
+
+    graph.profile_comparison("data/soundings/zg_JJA.txt", [zg_temp_00, zg_temp_12], [zg_rel_00, zg_rel_12], levels, title="Usporedba profila stvarnih vrijednosti i ERA5, Zagreb, 2011. - 2020. JJA", season="JJA")
+    plt.savefig("profile_comparison_zg_mean_JJA.png", facecolor='white', transparent=False)
+    plt.close()
+
+    graph.profile_comparison("data/soundings/zg_DJF.txt", [zg_temp_00, zg_temp_12], [zg_rel_00, zg_rel_12], levels, title="Usporedba profila stvarnih vrijednosti i ERA5, Zagreb, 2011. - 2020. DJF", season="DJF")
+    plt.savefig("profile_comparison_zg_mean_DJF.png", facecolor='white', transparent=False)
+    plt.close()
+
+    graph.profile_comparison("data/soundings/zd.txt", [zd_temp_00, zd_temp_12], [zd_rel_00, zd_rel_12], levels, title="Usporedba profila stvarnih vrijednosti i ERA5, Zadar, 2011. - 2020.")
+    plt.savefig("profile_comparison_zd_mean.png", facecolor='white', transparent=False)
+    plt.close()
+
+    graph.profile_comparison("data/soundings/zd_JJD.txt", [zd_temp_00, zd_temp_12], [zd_rel_00, zd_rel_12], levels, title="Usporedba profila stvarnih vrijednosti i ERA5, Zadar, 2011. - 2020. JJA", season="JJA")
+    plt.savefig("profile_comparison_zd_mean_JJA.png", facecolor='white', transparent=False)
+    plt.close()
+
+    graph.profile_comparison("data/soundings/zd_DJF.txt", [zd_temp_00, zd_temp_12], [zd_rel_00, zd_rel_12], levels, title="Usporedba profila stvarnih vrijednosti i ERA5, Zadar, 2011. - 2020. DJF", season="DJF")
+    plt.savefig("profile_comparison_zd_mean_DJF.png", facecolor='white', transparent=False)
+    plt.close()
