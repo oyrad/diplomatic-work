@@ -375,3 +375,9 @@ def hovmoeller(zg_temp_00, zg_temp_12, zg_rel_00, zg_rel_12, zg_spec_00, zg_spec
     graph.hovmoeller(zd_spec_12, levels, cmap_levels=hovmoeller_spec_levels, cmap_label="[g/kg]", title="Specifična vlažnost, Zadar 12 UTC, DJF", season="DJF")
     plt.savefig("images/hovmoeller/spec/zd/hov_spec_zd_12_DJF.png", facecolor='white', transparent=False)    
     plt.close()
+
+
+def profile_comparison(zg_temp_00, zg_temp_12, zg_rel_00, zg_rel_12, zd_temp_00, zd_temp_12, zd_rel_00, zd_rel_12):
+    graph.profile_comparison("data/soundings/zg.txt", [zg_temp_00, zg_temp_12], [zg_rel_00, zg_rel_12], levels, title="Usporedba profila stvarnih vrijednosti i ERA5, Zagreb, 2011. - 2020.")
+    plt.savefig("profile_comparison_zg_mean.png", facecolor='white', transparent=False)
+    plt.close()

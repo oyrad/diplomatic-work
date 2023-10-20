@@ -4,6 +4,20 @@ from sklearn.linear_model import LinearRegression
 import statsmodels.api as sm
 
 
+def get_mean_values_by_level(values, levels):
+    era5_mean = []
+
+    for level in range(len(levels)):
+        current_values = []
+
+        for time_step in range(852, 972):
+            current_values.append(util.get_average_or_single_value(values, time_step, level))
+
+        era5_mean.append(np.mean(current_values))
+
+    return era5_mean
+
+
 def get_climatology_by_level(values, levels, season):
     climatology_by_level = []
 
@@ -95,3 +109,29 @@ def get_ttest(values, levels, season):
         pvalue_by_level.append(results.pvalues[1])
 
     return pvalue_by_level
+
+
+def get_sounding_values_by_level(sondage_file, all_pressure_levels):
+    temperature, rel_humidity = util.read_sounding_file(sondage_file, all_pressure_levels)
+
+    temperature_by_level = []
+    rel_humidity_by_level = []
+
+    for pressure_level in all_pressure_levels:
+        current_level_temperature = [] 
+        current_level_rel_humidity = []
+
+        for i in range(len(temperature)):
+            if round(pressure_level) in temperature[i]:
+                current_level_temperature.append(temperature[i][round(pressure_level)])
+
+            if round(pressure_level) in rel_humidity[i]:
+                current_level_rel_humidity.append(rel_humidity[i][round(pressure_level)])
+
+        temperature_by_level.append(np.mean(current_level_temperature))
+        rel_humidity_by_level.append(np.mean(current_level_rel_humidity))
+
+        current_level_temperature = []
+        current_level_rel_humidity = []
+
+    return temperature_by_level, rel_humidity_by_level

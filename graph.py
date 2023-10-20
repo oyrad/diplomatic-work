@@ -95,6 +95,9 @@ def hovmoeller(values, levels, cmap_levels, cmap_label, title, season="none"):
     fig.colorbar(contour, ticks=cmap_levels, label=cmap_label)
 
 
+def profile_comparison():
+    return
+
 def comparison(era5_temp, era5_rel, real_temp, real_rel):
     era5_temp_mean = []
     era5_rel_mean = []
@@ -114,8 +117,7 @@ def comparison(era5_temp, era5_rel, real_temp, real_rel):
     x_values = np.arange(len(date_list) - 12)
 
     fig, ax = plt.subplots(2, 1, figsize=(22, 16))
-    fig.suptitle(
-        "Usporedba stvarnih i ERA5 vrijednosti na 850 hPa, Zagreb, 2011. - 2020.", fontsize=suptitle_size)
+    fig.suptitle("Usporedba stvarnih i ERA5 vrijednosti na 850 hPa, Zagreb, 2011. - 2020.", fontsize=suptitle_size)
 
     ax[0].plot(x_values, real_temp, label="Stvarna vrijednost")
     ax[0].plot(x_values, era5_temp_mean, label="ERA5")
@@ -137,3 +139,29 @@ def comparison(era5_temp, era5_rel, real_temp, real_rel):
     ax[1].set_xlabel("Godina", fontsize=label_size)
     ax[1].set_ylabel("Relativna vlažnost [%]", fontsize=label_size)
     ax[1].set_title("Relativna vlažnost", fontsize=title_size)
+
+
+def profile_comparison(sondage_file, temp, rel, levels, title):
+    all_pressure_levels = np.linspace(10, 1000, 500)
+    real_temp, real_rel = fn.get_sounding_values_by_level(sondage_file, all_pressure_levels)
+    era5_temp = fn.get_mean_values_by_level(temp, levels)
+    era5_rel = fn.get_mean_values_by_level(rel, levels)
+
+    fig, ax = plt.subplots(1, 2, figsize=(20, 12))
+    fig.suptitle(title, fontsize=suptitle_size)
+
+    ax[0].plot(era5_temp, levels, label="ERA5")
+    ax[0].plot(real_temp, all_pressure_levels, label="Stvarna vrijednost")
+    ax[0].set_xlabel(r"Temperatura [$^{\circ}$ C]", fontsize=label_size)
+    ax[0].set_ylabel("Tlak [hPa]", fontsize=label_size)
+    ax[0].set_title("Temperatura", fontsize=title_size)
+    ax[0].invert_yaxis()
+    ax[0].legend()
+
+    ax[1].plot(era5_rel, levels, label="ERA5")
+    ax[1].plot(real_rel, all_pressure_levels, label="Stvarna vrijednost")
+    ax[1].set_xlabel("Relativna vlažnost [%]", fontsize=label_size)
+    ax[1].set_ylabel("Tlak [hPa]", fontsize=label_size)
+    ax[1].set_title("Relativna vlažnost", fontsize=title_size)
+    ax[1].invert_yaxis()
+    ax[1].legend()
