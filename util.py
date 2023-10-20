@@ -38,7 +38,8 @@ def read_sounding_file(sondage_file):
 
             if columns[0] == "Description":
                 temperature.append(np.mean(current_date_temperature))
-                relative_humidity.append(np.mean(current_date_relative_humidity))
+                relative_humidity.append(
+                    np.mean(current_date_relative_humidity))
 
                 current_date_temperature = []
                 current_date_relative_humidity = []

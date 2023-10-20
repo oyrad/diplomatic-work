@@ -1,6 +1,7 @@
 import numpy as np
 import functions as fn
 import datetime
+import util
 import matplotlib.pyplot as plt
 
 suptitle_size = 20
@@ -92,3 +93,47 @@ def hovmoeller(values, levels, cmap_levels, cmap_label, title, season="none"):
     )
 
     fig.colorbar(contour, ticks=cmap_levels, label=cmap_label)
+
+
+def comparison(era5_temp, era5_rel, real_temp, real_rel):
+    era5_temp_mean = []
+    era5_rel_mean = []
+    for time_step in range(852, 972):
+        current_temp = util.get_average_value(era5_temp, time_step, 30)
+        current_rel = util.get_average_value(era5_rel, time_step, 30)
+        era5_temp_mean.append(current_temp)
+        era5_rel_mean.append(current_rel)
+
+    date_list = []
+
+    for year in range(2011, 2022):
+        for month in range(1, 13):
+            date = datetime.date(year, month, 1)
+            date_list.append(date)
+
+    x_values = np.arange(len(date_list) - 12)
+
+    fig, ax = plt.subplots(2, 1, figsize=(22, 16))
+    fig.suptitle(
+        "Usporedba stvarnih i ERA5 vrijednosti na 850 hPa, Zagreb, 2011. - 2020.", fontsize=suptitle_size)
+
+    ax[0].plot(x_values, real_temp, label="Stvarna vrijednost")
+    ax[0].plot(x_values, era5_temp_mean, label="ERA5")
+    ax[0].legend()
+
+    ax[1].plot(x_values, real_rel, label="Stvarna vrijednost")
+    ax[1].plot(x_values, era5_rel_mean, label="ERA5")
+    ax[1].legend()
+
+    tick_indices = np.arange(0, len(date_list), 12)
+    ax[0].set_xticks(tick_indices)
+    ax[0].set_xticklabels([date_list[i].strftime("%Y") for i in tick_indices])
+    ax[0].set_xlabel("Godina", fontsize=label_size)
+    ax[0].set_ylabel(r"Temperatura [$^{\circ}$ C]", fontsize=label_size)
+    ax[0].set_title("Temperatura", fontsize=title_size)
+
+    ax[1].set_xticks(tick_indices)
+    ax[1].set_xticklabels([date_list[i].strftime("%Y") for i in tick_indices])
+    ax[1].set_xlabel("Godina", fontsize=label_size)
+    ax[1].set_ylabel("Relativna vlažnost [%]", fontsize=label_size)
+    ax[1].set_title("Relativna vlažnost", fontsize=title_size)
