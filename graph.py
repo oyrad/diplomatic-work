@@ -52,7 +52,7 @@ def ttest(temp, rel, spec, levels, title, season="none"):
     ax[2].set_title("Specifična vlažnost", fontsize=title_size)
 
     for i in range(3):
-        ax[i].set_xlim(0, 1.2)
+        ax[i].set_xlim(right=1.2)
         ax[i].invert_yaxis()
         ax[i].axvline(0.05, color="black", label=r"$\alpha = 0.05$")
         ax[i].set_xlabel("p-vrijednost", fontsize=label_size)
@@ -94,9 +94,6 @@ def hovmoeller(values, levels, cmap_levels, cmap_label, title, season="none"):
 
     fig.colorbar(contour, ticks=cmap_levels, label=cmap_label)
 
-
-def profile_comparison():
-    return
 
 def comparison(era5_temp, era5_rel, real_temp, real_rel):
     era5_temp_mean = []

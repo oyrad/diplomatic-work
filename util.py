@@ -43,6 +43,9 @@ def read_sounding_file(sondage_file, all_pressure_levels):
             if (columns[0] == "</PRE>"):
 
                 if (len(current_rel_humidity) < 2 or len(current_temperature) < 2):
+                    current_pressure = []
+                    current_temperature = []
+                    current_rel_humidity = []
                     continue
 
                 highest_pressure = current_pressure[0]
