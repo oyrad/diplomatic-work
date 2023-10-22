@@ -1,7 +1,8 @@
 import numpy as np
-import util
+import util, math
 from sklearn.linear_model import LinearRegression
 import statsmodels.api as sm
+from scipy import stats
 
 
 def get_mean_values_by_level(values, levels, season):
@@ -118,7 +119,7 @@ def get_ttest(values, levels, season):
 
 def get_sounding_values_by_level(sondage_file, all_pressure_levels):
     temperature, rel_humidity = util.read_sounding_file(sondage_file, all_pressure_levels)
-
+ 
     temperature_by_level = []
     rel_humidity_by_level = []
 
@@ -140,3 +141,51 @@ def get_sounding_values_by_level(sondage_file, all_pressure_levels):
         current_level_rel_humidity = []
 
     return temperature_by_level, rel_humidity_by_level
+
+def get_profile_comparison_ttest(sondage_file, temp, rel, levels, season):
+    real_temp, real_rel = util.read_sounding_file(sondage_file, levels)
+    temp_ttest, rel_ttest = [], []
+
+    for current_level in range(len(levels)):
+        real_temp_current, real_rel_current, era5_temp_current, era5_rel_current = [], [], [], [] 
+
+        for time_step in range(852, 972):
+            if season == "none":
+                era5_temp_current.append(util.get_average_or_single_value(temp, time_step, current_level))
+                era5_rel_current.append(util.get_average_or_single_value(rel, time_step, current_level))
+            else:
+                temp_value = util.get_seasonal_value(temp, time_step, current_level, season)
+                rel_value = util.get_seasonal_value(rel, time_step, current_level, season)
+                if temp_value:
+                    era5_temp_current.append(temp_value)
+                if rel_value:
+                    era5_rel_current.append(rel_value)
+
+        for i in range(len(real_temp)):
+            if round(levels[current_level]) in real_temp[i]:
+                real_temp_current.append(real_temp[i][round(levels[current_level])])
+
+            if round(levels[current_level]) in real_rel[i]:
+                real_rel_current.append(real_rel[i][round(levels[current_level])])
+
+        if (len(real_temp_current) > 0):
+            result = sm.stats.ttest_ind(real_temp_current, era5_temp_current)
+            temp_ttest.append(result[1])
+
+        if (len(real_rel_current) > 0):
+            result = sm.stats.ttest_ind(real_rel_current, era5_rel_current)
+            rel_ttest.append(result[1])
+
+        real_temp_current, real_rel_current, era5_temp_current, era5_rel_current = [], [], [], []
+    
+    while len(temp_ttest) < len(levels):
+        temp_ttest.insert(0, math.nan)
+
+    while len(rel_ttest) < len(levels):
+        rel_ttest.insert(0, math.nan)
+
+    return temp_ttest, rel_ttest
+
+    
+
+

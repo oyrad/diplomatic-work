@@ -51,8 +51,8 @@ def read_sounding_file(sondage_file, all_pressure_levels):
                 highest_pressure = current_pressure[0]
                 lowest_pressure = current_pressure[-1]
 
-                pressure_mask = (all_pressure_levels >= lowest_pressure) & (all_pressure_levels <= highest_pressure)
-                applicable_pressure_levels = all_pressure_levels[pressure_mask]
+                pressure_mask =  [pressure >= lowest_pressure and pressure <= highest_pressure for pressure in all_pressure_levels]
+                applicable_pressure_levels = [pressure for pressure, is_applicable in zip(all_pressure_levels, pressure_mask) if is_applicable]
 
                 temp_interpolation_function = interpolate.interp1d(current_pressure, current_temperature, kind='linear')
                 rel_interpolation_function = interpolate.interp1d(current_pressure, current_rel_humidity, kind='linear')
@@ -63,7 +63,7 @@ def read_sounding_file(sondage_file, all_pressure_levels):
                 for i in range(len(applicable_pressure_levels)):
                     interpolated_temp[round(applicable_pressure_levels[i])] = temp_interpolation_function(applicable_pressure_levels[i])
                     interpolated_rel[round(applicable_pressure_levels[i])] = rel_interpolation_function(applicable_pressure_levels[i])
-
+                
                 temperature.append(interpolated_temp)
                 relative_humidity.append(interpolated_rel)
 
