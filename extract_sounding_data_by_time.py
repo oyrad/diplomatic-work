@@ -4,7 +4,7 @@ import numpy as np
 
 max_retries = 3
 
-for year in range(2016, 2021):
+for year in range(2017, 2021):
     for month in range(1, 13):
         if month == 2:
             dates = np.arange(1, 29)
