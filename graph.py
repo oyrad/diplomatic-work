@@ -113,7 +113,10 @@ def comparison(era5_temp, era5_rel, real_temp, real_rel):
     x_values = np.arange(len(date_list) - 12)
 
     fig, ax = plt.subplots(2, 1, figsize=(22, 16))
-    fig.suptitle("Usporedba stvarnih i ERA5 vrijednosti na 850 hPa, Zagreb, 2011. - 2020.", fontsize=suptitle_size)
+    fig.suptitle(
+        "Usporedba stvarnih i ERA5 vrijednosti na 850 hPa, Zagreb, 2011. - 2020.",
+        fontsize=suptitle_size,
+    )
 
     ax[0].plot(x_values, real_temp, label="Stvarna vrijednost")
     ax[0].plot(x_values, era5_temp_mean, label="ERA5")
@@ -138,7 +141,9 @@ def comparison(era5_temp, era5_rel, real_temp, real_rel):
 
 
 def profile_comparison(sondage_file, temp, rel, levels, title, season="none"):
-    real_temp, real_rel = fn.get_sounding_values_by_level(sondage_file, all_pressure_levels=levels)
+    real_temp, real_rel = fn.get_sounding_values_by_level(
+        sondage_file, all_pressure_levels=levels
+    )
     era5_temp = fn.get_mean_values_by_level(temp, levels, season)
     era5_rel = fn.get_mean_values_by_level(rel, levels, season)
 
@@ -163,7 +168,9 @@ def profile_comparison(sondage_file, temp, rel, levels, title, season="none"):
 
 
 def profile_comparison_ttest(sondage_file, temp, rel, levels, title, season="none"):
-    temp_pvalues, rel_pvalues = fn.get_profile_comparison_ttest(sondage_file, temp, rel, levels, season)
+    temp_pvalues, rel_pvalues = fn.get_profile_comparison_ttest(
+        sondage_file, temp, rel, levels, season
+    )
 
     fig, ax = plt.subplots(1, 2, figsize=(20, 12))
     fig.suptitle(title, fontsize=suptitle_size)
@@ -178,6 +185,6 @@ def profile_comparison_ttest(sondage_file, temp, rel, levels, title, season="non
         ax[i].set_ylabel("Tlak [hPa]", fontsize=label_size)
         ax[i].set_xlabel("p-vrijednost", fontsize=label_size)
         ax[i].axvline(0.05, color="black", label=r"$\alpha = 0.05$")
+        ax[i].set_ylim(bottom=0.7)
         ax[i].invert_yaxis()
         ax[i].legend()
-        
