@@ -4,8 +4,8 @@ import numpy as np
 
 max_retries = 3
 
-for year in range(2019, 2021):
-    for month in range(1, 13):
+for year in range(2020, 2021):
+    for month in range(4, 13):
         if month == 2:
             dates = np.arange(1, 29)
         elif month == 4 or month == 6 or month == 9 or month == 11:
