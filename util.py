@@ -1,6 +1,7 @@
 import netCDF4 as nc
 import numpy as np
-from scipy import interpolate
+from scipy import interpolate, stats
+import math
 
 
 def load_data(file_path, variable):
@@ -143,4 +144,17 @@ def get_seasonal_value(values, time_step, level, season):
 
     return 0
 
+
+def ftest(a, b):
+    if (len(a) < 2 or len(b) < 2):
+        return math.nan
     
+    real_var = np.var(a, ddof=1)
+    era5_var = np.var(b, ddof=1)
+
+    f_value= real_var / era5_var
+
+    df1 = len(a) - 1
+    df2 = len(b) - 1
+
+    return 1 - stats.f.cdf(f_value, df1, df2)

@@ -2,6 +2,13 @@ import requests
 from requests.exceptions import RequestException
 
 max_retries = 3
+target_file = "zg.txt"
+station = "zg"
+
+if (station == "zg"):
+    station_code = "14240"
+elif (station == "zd"):
+    station_code = "14430"
 
 for year in range(2011, 2021):
     for month in range(1, 13):
@@ -14,7 +21,7 @@ for year in range(2011, 2021):
         else:
             endDate = 3112
 
-        url = f"https://weather.uwyo.edu/cgi-bin/sounding?region=europe&TYPE=TEXT%3ALIST&YEAR={year}&MONTH={month}&FROM=0100&TO={endDate}&STNM=14240"
+        url = f"https://weather.uwyo.edu/cgi-bin/sounding?region=europe&TYPE=TEXT%3ALIST&YEAR={year}&MONTH={month}&FROM=0100&TO={endDate}&STNM={station_code}"
 
         response = requests.get(url, verify=False)
 
@@ -24,11 +31,11 @@ for year in range(2011, 2021):
 
                 if response.status_code == 200:
                     with open(
-                        "data/soundings/zg.txt", "a", encoding="utf-8"
+                        f"data/soundings/{target_file}", "a", encoding="utf-8"
                     ) as txt_file:
                         txt_file.write(response.text)
 
-                    print(f"Extracted sounding data for {month}/{year} to zg.txt.")
+                    print(f"Extracted sounding data for {month}/{year} to {target_file}.")
                     break
             except RequestException as e:
                 print(
