@@ -144,8 +144,8 @@ def profile_comparison(sondage_file, temp, rel, levels, title, season="none"):
     real_temp, real_rel = fn.get_sounding_values_by_level(
         sondage_file, all_pressure_levels=levels
     )
-    era5_temp = fn.get_mean_values_by_level(temp, levels, season)
-    era5_rel = fn.get_mean_values_by_level(rel, levels, season)
+    era5_temp = fn.get_era5_values_by_level(temp, levels, season)
+    era5_rel = fn.get_era5_values_by_level(rel, levels, season)
 
     fig, ax = plt.subplots(1, 2, figsize=(20, 12))
     fig.suptitle(title, fontsize=suptitle_size)
@@ -169,6 +169,57 @@ def profile_comparison(sondage_file, temp, rel, levels, title, season="none"):
 
 def profile_comparison_ttest(sondage_file, temp, rel, levels, title, season="none"):
     temp_pvalues, rel_pvalues = fn.get_profile_comparison_ttest(
+        sondage_file, temp, rel, levels, season
+    )
+
+    fig, ax = plt.subplots(1, 2, figsize=(20, 12))
+    fig.suptitle(title, fontsize=suptitle_size)
+
+    ax[0].loglog(temp_pvalues, levels)
+    ax[1].loglog(rel_pvalues, levels)
+
+    ax[0].set_title("Temperatura", fontsize=title_size)
+    ax[1].set_title("Relativna vlažnost", fontsize=title_size)
+
+    for i in range(2):
+        ax[i].set_ylabel("Tlak [hPa]", fontsize=label_size)
+        ax[i].set_xlabel("p-vrijednost", fontsize=label_size)
+        ax[i].axvline(0.05, color="black", label=r"$\alpha = 0.05$")
+        ax[i].set_ylim(bottom=0.7)
+        ax[i].invert_yaxis()
+        ax[i].legend()
+
+
+def profile_comparison_stddev(sondage_file, temp, rel, levels, title, season="none"):
+    real_temp, real_rel = fn.get_sounding_values_by_level(
+        sondage_file, all_pressure_levels=levels, type="stddev"
+    )
+    era5_temp = fn.get_era5_values_by_level(temp, levels, season, type="stddev")
+    era5_rel = fn.get_era5_values_by_level(rel, levels, season, type="stddev")
+
+    fig, ax = plt.subplots(1, 2, figsize=(20, 12))
+    fig.suptitle(title, fontsize=suptitle_size)
+
+    ax[0].semilogy(era5_temp, levels, label="ERA5")
+    ax[0].semilogy(real_temp, levels, label="Stvarna vrijednost")
+    ax[0].set_xlabel(r"Temperatura [$^{\circ}$ C]", fontsize=label_size)
+    ax[0].set_ylabel("Tlak [hPa]", fontsize=label_size)
+    ax[0].set_title("Temperatura", fontsize=title_size)
+    ax[0].invert_yaxis()
+    ax[0].legend()
+    ax[0].set_xlim(left=-0.5)
+
+    ax[1].semilogy(era5_rel, levels, label="ERA5")
+    ax[1].semilogy(real_rel, levels, label="Stvarna vrijednost")
+    ax[1].set_xlabel("Relativna vlažnost [%]", fontsize=label_size)
+    ax[1].set_ylabel("Tlak [hPa]", fontsize=label_size)
+    ax[1].set_title("Relativna vlažnost", fontsize=title_size)
+    ax[1].invert_yaxis()
+    ax[1].legend()
+
+
+def profile_comparison_ftest(sondage_file, temp, rel, levels, title, season="none"):
+    temp_pvalues, rel_pvalues = fn.get_profile_comparison_ftest(
         sondage_file, temp, rel, levels, season
     )
 

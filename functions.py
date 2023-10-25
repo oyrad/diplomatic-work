@@ -5,7 +5,7 @@ import statsmodels.api as sm
 from scipy import stats
 
 
-def get_mean_values_by_level(values, levels, season):
+def get_era5_values_by_level(values, levels, season, type="mean"):
     era5_mean = []
 
     for level in range(len(levels)):
@@ -13,13 +13,18 @@ def get_mean_values_by_level(values, levels, season):
 
         for time_step in range(852, 972):
             if season == "none":
-                current_values.append(util.get_average_or_single_value(values, time_step, level))
+                current_values.append(
+                    util.get_average_or_single_value(values, time_step, level)
+                )
             else:
                 value = util.get_seasonal_value(values, time_step, level, season)
                 if value:
                     current_values.append(value)
 
-        era5_mean.append(np.mean(current_values))
+        if type == "mean":
+            era5_mean.append(np.mean(current_values))
+        elif type == "stddev":
+            era5_mean.append(np.std(current_values))
 
     return era5_mean
 
@@ -35,8 +40,7 @@ def get_climatology_by_level(values, levels, season):
                     util.get_average_or_single_value(values, time_step, level)
                 )
             else:
-                value = util.get_seasonal_value(
-                    values, time_step, level, season)
+                value = util.get_seasonal_value(values, time_step, level, season)
                 if value:
                     current_values.append(value)
 
@@ -104,7 +108,8 @@ def get_ttest(values, levels, season):
 
     for level in range(len(levels)):
         anomalies_by_year = get_anomalies_by_year(
-            values, level, climatology_by_level, season)
+            values, level, climatology_by_level, season
+        )
 
         years = np.arange(1940, 2023, 1).reshape(-1, 1)
 
@@ -117,14 +122,16 @@ def get_ttest(values, levels, season):
     return pvalue_by_level
 
 
-def get_sounding_values_by_level(sondage_file, all_pressure_levels):
-    temperature, rel_humidity = util.read_sounding_file(sondage_file, all_pressure_levels)
- 
+def get_sounding_values_by_level(sondage_file, all_pressure_levels, type="mean"):
+    temperature, rel_humidity = util.read_sounding_file(
+        sondage_file, all_pressure_levels
+    )
+
     temperature_by_level = []
     rel_humidity_by_level = []
 
     for pressure_level in all_pressure_levels:
-        current_level_temperature = [] 
+        current_level_temperature = []
         current_level_rel_humidity = []
 
         for i in range(len(temperature)):
@@ -132,30 +139,50 @@ def get_sounding_values_by_level(sondage_file, all_pressure_levels):
                 current_level_temperature.append(temperature[i][round(pressure_level)])
 
             if round(pressure_level) in rel_humidity[i]:
-                current_level_rel_humidity.append(rel_humidity[i][round(pressure_level)])
+                current_level_rel_humidity.append(
+                    rel_humidity[i][round(pressure_level)]
+                )
 
-        temperature_by_level.append(np.mean(current_level_temperature))
-        rel_humidity_by_level.append(np.mean(current_level_rel_humidity))
+        if type == "mean":
+            temperature_by_level.append(np.mean(current_level_temperature))
+            rel_humidity_by_level.append(np.mean(current_level_rel_humidity))
+        elif type == "stddev":
+            temperature_by_level.append(np.std(current_level_temperature))
+            rel_humidity_by_level.append(np.std(current_level_rel_humidity))
 
         current_level_temperature = []
         current_level_rel_humidity = []
 
     return temperature_by_level, rel_humidity_by_level
 
+
 def get_profile_comparison_ttest(sondage_file, temp, rel, levels, season):
     real_temp, real_rel = util.read_sounding_file(sondage_file, levels)
     temp_ttest, rel_ttest = [], []
 
     for current_level in range(len(levels)):
-        real_temp_current, real_rel_current, era5_temp_current, era5_rel_current = [], [], [], [] 
+        real_temp_current, real_rel_current, era5_temp_current, era5_rel_current = (
+            [],
+            [],
+            [],
+            [],
+        )
 
         for time_step in range(852, 972):
             if season == "none":
-                era5_temp_current.append(util.get_average_or_single_value(temp, time_step, current_level))
-                era5_rel_current.append(util.get_average_or_single_value(rel, time_step, current_level))
+                era5_temp_current.append(
+                    util.get_average_or_single_value(temp, time_step, current_level)
+                )
+                era5_rel_current.append(
+                    util.get_average_or_single_value(rel, time_step, current_level)
+                )
             else:
-                temp_value = util.get_seasonal_value(temp, time_step, current_level, season)
-                rel_value = util.get_seasonal_value(rel, time_step, current_level, season)
+                temp_value = util.get_seasonal_value(
+                    temp, time_step, current_level, season
+                )
+                rel_value = util.get_seasonal_value(
+                    rel, time_step, current_level, season
+                )
                 if temp_value:
                     era5_temp_current.append(temp_value)
                 if rel_value:
@@ -168,16 +195,21 @@ def get_profile_comparison_ttest(sondage_file, temp, rel, levels, season):
             if round(levels[current_level]) in real_rel[i]:
                 real_rel_current.append(real_rel[i][round(levels[current_level])])
 
-        if (len(real_temp_current) > 0):
+        if len(real_temp_current) > 0:
             result = sm.stats.ttest_ind(real_temp_current, era5_temp_current)
             temp_ttest.append(result[1])
 
-        if (len(real_rel_current) > 0):
+        if len(real_rel_current) > 0:
             result = sm.stats.ttest_ind(real_rel_current, era5_rel_current)
             rel_ttest.append(result[1])
 
-        real_temp_current, real_rel_current, era5_temp_current, era5_rel_current = [], [], [], []
-    
+        real_temp_current, real_rel_current, era5_temp_current, era5_rel_current = (
+            [],
+            [],
+            [],
+            [],
+        )
+
     while len(temp_ttest) < len(levels):
         temp_ttest.insert(0, math.nan)
 
@@ -186,6 +218,79 @@ def get_profile_comparison_ttest(sondage_file, temp, rel, levels, season):
 
     return temp_ttest, rel_ttest
 
-    
 
+def get_profile_comparison_ftest(sondage_file, temp, rel, levels, season):
+    real_temp, real_rel = util.read_sounding_file(sondage_file, levels)
+    temp_ftest, rel_ftest = [], []
 
+    for current_level in range(len(levels)):
+        real_temp_current, real_rel_current, era5_temp_current, era5_rel_current = (
+            [],
+            [],
+            [],
+            [],
+        )
+
+        for time_step in range(852, 972):
+            if season == "none":
+                era5_temp_current.append(
+                    util.get_average_or_single_value(temp, time_step, current_level)
+                )
+                era5_rel_current.append(
+                    util.get_average_or_single_value(rel, time_step, current_level)
+                )
+            else:
+                temp_value = util.get_seasonal_value(
+                    temp, time_step, current_level, season
+                )
+                rel_value = util.get_seasonal_value(
+                    rel, time_step, current_level, season
+                )
+                if temp_value:
+                    era5_temp_current.append(temp_value)
+                if rel_value:
+                    era5_rel_current.append(rel_value)
+
+        for i in range(len(real_temp)):
+            if round(levels[current_level]) in real_temp[i]:
+                real_temp_current.append(real_temp[i][round(levels[current_level])])
+
+            if round(levels[current_level]) in real_rel[i]:
+                real_rel_current.append(real_rel[i][round(levels[current_level])])
+
+        real_temp_var = np.var(real_temp_current, ddof=1)
+        era5_temp_var = np.var(era5_temp_current, ddof=1)
+
+        f_value_temp = real_temp_var / era5_temp_var
+
+        df1_temp = len(real_temp_current) - 1
+        df2_temp = len(era5_temp_current) - 1
+
+        p_value_temp = 1 - stats.f.cdf(f_value_temp, df1_temp, df2_temp)
+        temp_ftest.append(p_value_temp)
+
+        real_rel_var = np.var(real_rel_current, ddof=1)
+        era5_rel_var = np.var(era5_rel_current, ddof=1)
+
+        f_value_rel = real_rel_var / era5_rel_var
+
+        df1_rel = len(real_rel_current) - 1
+        df2_rel = len(era5_rel_current) - 1
+
+        p_value_rel = 1 - stats.f.cdf(f_value_rel, df1_rel, df2_rel)
+        rel_ftest.append(p_value_rel)
+
+        real_temp_current, real_rel_current, era5_temp_current, era5_rel_current = (
+            [],
+            [],
+            [],
+            [],
+        )
+
+    while len(temp_ftest) < len(levels):
+        temp_ftest.insert(0, math.nan)
+
+    while len(rel_ftest) < len(levels):
+        rel_ftest.insert(0, math.nan)
+
+    return temp_ftest, rel_ftest

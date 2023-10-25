@@ -1,6 +1,5 @@
-import graph
+import graph, util
 import matplotlib.pyplot as plt
-from os.path import exists
 
 levels = [
     1,
@@ -46,21 +45,28 @@ hovmoeller_temp_levels = [-3, -2, -1, -0.5, -0.25, 0.25, 0.5, 1, 2, 3]
 hovmoeller_rel_levels = [-10, -8, -6, -4, -2, -1, 1, 2, 4, 6, 8, 10]
 hovmoeller_spec_levels = [-1, -0.8, -0.6, -0.4, -0.2, -0.1, 0.1, 0.2, 0.4, 0.6, 0.8, 1]
 
+zg_temp_00, zg_temp_12 = util.load_data("data/era5/zg_temp_00.nc", "t"), util.load_data(
+    "data/era5/zg_temp_12.nc", "t"
+)
+zg_rel_00, zg_rel_12 = util.load_data("data/era5/zg_rel_00.nc", "r"), util.load_data(
+    "data/era5/zg_rel_12.nc", "r"
+)
+zg_spec_00, zg_spec_12 = util.load_data("data/era5/zg_spec_00.nc", "q"), util.load_data(
+    "data/era5/zg_spec_12.nc", "q"
+)
 
-def trend(
-    zg_temp_00,
-    zg_temp_12,
-    zg_rel_00,
-    zg_rel_12,
-    zg_spec_00,
-    zg_spec_12,
-    zd_temp_00,
-    zd_temp_12,
-    zd_rel_00,
-    zd_rel_12,
-    zd_spec_00,
-    zd_spec_12,
-):
+zd_temp_00, zd_temp_12 = util.load_data("data/era5/zd_temp_00.nc", "t"), util.load_data(
+    "data/era5/zd_temp_12.nc", "t"
+)
+zd_rel_00, zd_rel_12 = util.load_data("data/era5/zd_rel_00.nc", "r"), util.load_data(
+    "data/era5/zd_rel_12.nc", "r"
+)
+zd_spec_00, zd_spec_12 = util.load_data("data/era5/zd_spec_00.nc", "q"), util.load_data(
+    "data/era5/zd_spec_12.nc", "q"
+)
+
+
+def trend():
     graph.trend(
         [zg_temp_00, zg_temp_12],
         [zg_rel_00, zg_rel_12],
@@ -266,20 +272,7 @@ def trend(
     plt.close()
 
 
-def trend_ttest(
-    zg_temp_00,
-    zg_temp_12,
-    zg_rel_00,
-    zg_rel_12,
-    zg_spec_00,
-    zg_spec_12,
-    zd_temp_00,
-    zd_temp_12,
-    zd_rel_00,
-    zd_rel_12,
-    zd_spec_00,
-    zd_spec_12,
-):
+def trend_ttest():
     graph.ttest(
         [zg_temp_00, zg_temp_12],
         [zg_rel_00, zg_rel_12],
@@ -545,20 +538,7 @@ def trend_ttest(
     plt.close()
 
 
-def hovmoeller(
-    zg_temp_00,
-    zg_temp_12,
-    zg_rel_00,
-    zg_rel_12,
-    zg_spec_00,
-    zg_spec_12,
-    zd_temp_00,
-    zd_temp_12,
-    zd_rel_00,
-    zd_rel_12,
-    zd_spec_00,
-    zd_spec_12,
-):
+def hovmoeller():
     graph.hovmoeller(
         [zg_temp_00, zg_temp_12],
         levels,
@@ -1352,16 +1332,7 @@ def hovmoeller(
     plt.close()
 
 
-def profile_comparison(
-    zg_temp_00,
-    zg_temp_12,
-    zg_rel_00,
-    zg_rel_12,
-    zd_temp_00,
-    zd_temp_12,
-    zd_rel_00,
-    zd_rel_12,
-):
+def profile_comparison():
     graph.profile_comparison(
         "data/soundings/zg.txt",
         [zg_temp_00, zg_temp_12],
@@ -1627,16 +1598,7 @@ def profile_comparison(
     plt.close()
 
 
-def profile_comparison_ttest(
-    zg_temp_00,
-    zg_temp_12,
-    zg_rel_00,
-    zg_rel_12,
-    zd_temp_00,
-    zd_temp_12,
-    zd_rel_00,
-    zd_rel_12,
-):
+def profile_comparison_ttest():
     graph.profile_comparison_ttest(
         "data/soundings/zg.txt",
         [zg_temp_00, zg_temp_12],
@@ -1894,6 +1856,538 @@ def profile_comparison_ttest(
     )
     plt.savefig(
         "images/profile_comparison/zd/ttest/profile_comparison_zd_12_DJF_ttest.png",
+        facecolor="white",
+        transparent=False,
+    )
+    plt.close()
+
+
+def profile_comparison_stddev():
+    graph.profile_comparison_stddev(
+        "data/soundings/zg.txt",
+        [zg_temp_00, zg_temp_12],
+        [zg_rel_00, zg_rel_12],
+        levels,
+        title="Usporedba standardnih devijacija profila stvarnih vrijednosti i ERA5, Zagreb, 2011. - 2020.",
+    )
+    plt.savefig(
+        "images/profile_comparison_stddev/zg/profile_comparison_stddev_zg_mean.png",
+        facecolor="white",
+        transparent=False,
+    )
+    plt.close()
+
+    graph.profile_comparison_stddev(
+        "data/soundings/zg_JJA.txt",
+        [zg_temp_00, zg_temp_12],
+        [zg_rel_00, zg_rel_12],
+        levels,
+        title="Usporedba standardnih devijacija profila stvarnih vrijednosti i ERA5, Zagreb, 2011. - 2020. JJA",
+        season="JJA",
+    )
+    plt.savefig(
+        "images/profile_comparison_stddev/zg/profile_comparison_stddev_zg_mean_JJA.png",
+        facecolor="white",
+        transparent=False,
+    )
+    plt.close()
+
+    graph.profile_comparison_stddev(
+        "data/soundings/zg_DJF.txt",
+        [zg_temp_00, zg_temp_12],
+        [zg_rel_00, zg_rel_12],
+        levels,
+        title="Usporedba standardnih devijacija profila stvarnih vrijednosti i ERA5, Zagreb, 2011. - 2020. DJF",
+        season="DJF",
+    )
+    plt.savefig(
+        "images/profile_comparison_stddev/zg/profile_comparison_stddev_zg_mean_DJF.png",
+        facecolor="white",
+        transparent=False,
+    )
+    plt.close()
+
+    graph.profile_comparison_stddev(
+        "data/soundings/zg_00.txt",
+        zg_temp_00,
+        zg_rel_00,
+        levels,
+        title="Usporedba standardnih devijacija profila stvarnih vrijednosti i ERA5, Zagreb 00 UTC, 2011. - 2020.",
+    )
+    plt.savefig(
+        "images/profile_comparison_stddev/zg/profile_comparison_stddev_zg_00.png",
+        facecolor="white",
+        transparent=False,
+    )
+    plt.close()
+
+    graph.profile_comparison_stddev(
+        "data/soundings/zg_00_JJA.txt",
+        zg_temp_00,
+        zg_rel_00,
+        levels,
+        title="Usporedba standardnih devijacija profila stvarnih vrijednosti i ERA5, Zagreb 00 UTC, 2011. - 2020. JJA",
+        season="JJA",
+    )
+    plt.savefig(
+        "images/profile_comparison_stddev/zg/profile_comparison_stddev_zg_00_JJA.png",
+        facecolor="white",
+        transparent=False,
+    )
+    plt.close()
+
+    graph.profile_comparison_stddev(
+        "data/soundings/zg_00_DJF.txt",
+        zg_temp_00,
+        zg_rel_00,
+        levels,
+        title="Usporedba standardnih devijacija profila stvarnih vrijednosti i ERA5, Zagreb 00 UTC, 2011. - 2020. DJF",
+        season="DJF",
+    )
+    plt.savefig(
+        "images/profile_comparison_stddev/zg/profile_comparison_stddev_zg_00_DJF.png",
+        facecolor="white",
+        transparent=False,
+    )
+    plt.close()
+
+    graph.profile_comparison_stddev(
+        "data/soundings/zg_12.txt",
+        zg_temp_12,
+        zg_rel_12,
+        levels,
+        title="Usporedba standardnih devijacija profila stvarnih vrijednosti i ERA5, Zagreb 12 UTC, 2011. - 2020.",
+    )
+    plt.savefig(
+        "images/profile_comparison_stddev/zg/profile_comparison_stddev_zg_12.png",
+        facecolor="white",
+        transparent=False,
+    )
+    plt.close()
+
+    graph.profile_comparison_stddev(
+        "data/soundings/zg_12_JJA.txt",
+        zg_temp_12,
+        zg_rel_12,
+        levels,
+        title="Usporedba standardnih devijacija profila stvarnih vrijednosti i ERA5, Zagreb 12 UTC, 2011. - 2020. JJA",
+        season="JJA",
+    )
+    plt.savefig(
+        "images/profile_comparison_stddev/zg/profile_comparison_stddev_zg_12_JJA.png",
+        facecolor="white",
+        transparent=False,
+    )
+    plt.close()
+
+    graph.profile_comparison_stddev(
+        "data/soundings/zg_12_DJF.txt",
+        zg_temp_12,
+        zg_rel_12,
+        levels,
+        title="Usporedba standardnih devijacija profila stvarnih vrijednosti i ERA5, Zagreb 12 UTC, 2011. - 2020. DJF",
+        season="DJF",
+    )
+    plt.savefig(
+        "images/profile_comparison_stddev/zg/profile_comparison_stddev_zg_12_DJF.png",
+        facecolor="white",
+        transparent=False,
+    )
+    plt.close()
+
+    graph.profile_comparison_stddev(
+        "data/soundings/zd.txt",
+        [zd_temp_00, zd_temp_12],
+        [zd_rel_00, zd_rel_12],
+        levels,
+        title="Usporedba standardnih devijacija profila stvarnih vrijednosti i ERA5, Zadar, 2011. - 2020.",
+    )
+    plt.savefig(
+        "images/profile_comparison_stddev/zd/profile_comparison_stddev_zd_mean.png",
+        facecolor="white",
+        transparent=False,
+    )
+    plt.close()
+
+    graph.profile_comparison_stddev(
+        "data/soundings/zd_JJA.txt",
+        [zd_temp_00, zd_temp_12],
+        [zd_rel_00, zd_rel_12],
+        levels,
+        title="Usporedba standardnih devijacija profila stvarnih vrijednosti i ERA5, Zadar, 2011. - 2020. JJA",
+        season="JJA",
+    )
+    plt.savefig(
+        "images/profile_comparison_stddev/zd/profile_comparison_stddev_zd_mean_JJA.png",
+        facecolor="white",
+        transparent=False,
+    )
+    plt.close()
+
+    graph.profile_comparison_stddev(
+        "data/soundings/zd_DJF.txt",
+        [zd_temp_00, zd_temp_12],
+        [zd_rel_00, zd_rel_12],
+        levels,
+        title="Usporedba standardnih devijacija profila stvarnih vrijednosti i ERA5, Zadar, 2011. - 2020. DJF",
+        season="DJF",
+    )
+    plt.savefig(
+        "images/profile_comparison_stddev/zd/profile_comparison_stddev_zd_mean_DJF.png",
+        facecolor="white",
+        transparent=False,
+    )
+    plt.close()
+
+    graph.profile_comparison_stddev(
+        "data/soundings/zd_00.txt",
+        zd_temp_00,
+        zd_rel_00,
+        levels,
+        title="Usporedba standardnih devijacija profila stvarnih vrijednosti i ERA5, Zadar 00 UTC, 2011. - 2020.",
+    )
+    plt.savefig(
+        "images/profile_comparison_stddev/zd/profile_comparison_stddev_zd_00.png",
+        facecolor="white",
+        transparent=False,
+    )
+    plt.close()
+
+    graph.profile_comparison_stddev(
+        "data/soundings/zd_00_JJA.txt",
+        zd_temp_00,
+        zd_rel_00,
+        levels,
+        title="Usporedba standardnih devijacija profila stvarnih vrijednosti i ERA5, Zadar 00 UTC, 2011. - 2020. JJA",
+        season="JJA",
+    )
+    plt.savefig(
+        "images/profile_comparison_stddev/zd/profile_comparison_stddev_zd_00_JJA.png",
+        facecolor="white",
+        transparent=False,
+    )
+    plt.close()
+
+    graph.profile_comparison_stddev(
+        "data/soundings/zd_00_DJF.txt",
+        zd_temp_00,
+        zd_rel_00,
+        levels,
+        title="Usporedba standardnih devijacija profila stvarnih vrijednosti i ERA5, Zadar 00 UTC, 2011. - 2020. DJF",
+        season="DJF",
+    )
+    plt.savefig(
+        "images/profile_comparison_stddev/zd/profile_comparison_stddev_zd_00_DJF.png",
+        facecolor="white",
+        transparent=False,
+    )
+    plt.close()
+
+    graph.profile_comparison_stddev(
+        "data/soundings/zd_12.txt",
+        zd_temp_12,
+        zd_rel_12,
+        levels,
+        title="Usporedba standardnih devijacija profila stvarnih vrijednosti i ERA5, Zadar 12 UTC, 2011. - 2020.",
+    )
+    plt.savefig(
+        "images/profile_comparison_stddev/zd/profile_comparison_stddev_zd_12.png",
+        facecolor="white",
+        transparent=False,
+    )
+    plt.close()
+
+    graph.profile_comparison_stddev(
+        "data/soundings/zd_12_JJA.txt",
+        zd_temp_12,
+        zd_rel_12,
+        levels,
+        title="Usporedba standardnih devijacija profila stvarnih vrijednosti i ERA5, Zadar 12 UTC, 2011. - 2020. JJA",
+        season="JJA",
+    )
+    plt.savefig(
+        "images/profile_comparison_stddev/zd/profile_comparison_stddev_zd_12_JJA.png",
+        facecolor="white",
+        transparent=False,
+    )
+    plt.close()
+
+    graph.profile_comparison_stddev(
+        "data/soundings/zd_12_DJF.txt",
+        zd_temp_12,
+        zd_rel_12,
+        levels,
+        title="Usporedba standardnih devijacija profila stvarnih vrijednosti i ERA5, Zadar 12 UTC, 2011. - 2020. DJF",
+        season="DJF",
+    )
+    plt.savefig(
+        "images/profile_comparison_stddev/zd/profile_comparison_stddev_zd_12_DJF.png",
+        facecolor="white",
+        transparent=False,
+    )
+    plt.close()
+
+
+def profile_comparison_ftest():
+    graph.profile_comparison_ftest(
+        "data/soundings/zg.txt",
+        [zg_temp_00, zg_temp_12],
+        [zg_rel_00, zg_rel_12],
+        levels,
+        title="F-test profila stvarnih vrijednosti i ERA5, Zagreb, 2011. - 2020.",
+    )
+    plt.savefig(
+        "images/profile_comparison_stddev/zg/ftest/profile_comparison_zg_mean_ftest.png",
+        facecolor="white",
+        transparent=False,
+    )
+    plt.close()
+
+    graph.profile_comparison_ftest(
+        "data/soundings/zg_JJA.txt",
+        [zg_temp_00, zg_temp_12],
+        [zg_rel_00, zg_rel_12],
+        levels,
+        title="F-test profila stvarnih vrijednosti i ERA5, Zagreb, 2011. - 2020. JJA",
+        season="JJA",
+    )
+    plt.savefig(
+        "images/profile_comparison_stddev/zg/ftest/profile_comparison_zg_mean_JJA_ftest.png",
+        facecolor="white",
+        transparent=False,
+    )
+    plt.close()
+
+    graph.profile_comparison_ftest(
+        "data/soundings/zg_DJF.txt",
+        [zg_temp_00, zg_temp_12],
+        [zg_rel_00, zg_rel_12],
+        levels,
+        title="F-test profila stvarnih vrijednosti i ERA5, Zagreb, 2011. - 2020. DJF",
+        season="DJF",
+    )
+    plt.savefig(
+        "images/profile_comparison_stddev/zg/ftest/profile_comparison_zg_mean_DJF_ftest.png",
+        facecolor="white",
+        transparent=False,
+    )
+    plt.close()
+
+    graph.profile_comparison_ftest(
+        "data/soundings/zg_00.txt",
+        zg_temp_00,
+        zg_rel_00,
+        levels,
+        title="F-test profila stvarnih vrijednosti i ERA5, Zagreb 00 UTC, 2011. - 2020.",
+    )
+    plt.savefig(
+        "images/profile_comparison_stddev/zg/ftest/profile_comparison_zg_00_ftest.png",
+        facecolor="white",
+        transparent=False,
+    )
+    plt.close()
+
+    graph.profile_comparison_ftest(
+        "data/soundings/zg_00_JJA.txt",
+        zg_temp_00,
+        zg_rel_00,
+        levels,
+        title="F-test profila stvarnih vrijednosti i ERA5, Zagreb 00 UTC, 2011. - 2020. JJA",
+        season="JJA",
+    )
+    plt.savefig(
+        "images/profile_comparison_stddev/zg/ftest/profile_comparison_zg_00_JJA_ftest.png",
+        facecolor="white",
+        transparent=False,
+    )
+    plt.close()
+
+    graph.profile_comparison_ftest(
+        "data/soundings/zg_00_DJF.txt",
+        zg_temp_00,
+        zg_rel_00,
+        levels,
+        title="F-test profila stvarnih vrijednosti i ERA5, Zagreb 00 UTC, 2011. - 2020. DJF",
+        season="DJF",
+    )
+    plt.savefig(
+        "images/profile_comparison_stddev/zg/ftest/profile_comparison_zg_00_DJF_ftest.png",
+        facecolor="white",
+        transparent=False,
+    )
+    plt.close()
+
+    graph.profile_comparison_ftest(
+        "data/soundings/zg_12.txt",
+        zg_temp_12,
+        zg_rel_12,
+        levels,
+        title="F-test profila stvarnih vrijednosti i ERA5, Zagreb 12 UTC, 2011. - 2020.",
+    )
+    plt.savefig(
+        "images/profile_comparison_stddev/zg/ftest/profile_comparison_zg_12_ftest.png",
+        facecolor="white",
+        transparent=False,
+    )
+    plt.close()
+
+    graph.profile_comparison_ftest(
+        "data/soundings/zg_12_JJA.txt",
+        zg_temp_12,
+        zg_rel_12,
+        levels,
+        title="F-test profila stvarnih vrijednosti i ERA5, Zagreb 12 UTC, 2011. - 2020. JJA",
+        season="JJA",
+    )
+    plt.savefig(
+        "images/profile_comparison_stddev/zg/ftest/profile_comparison_zg_12_JJA_ftest.png",
+        facecolor="white",
+        transparent=False,
+    )
+    plt.close()
+
+    graph.profile_comparison_ftest(
+        "data/soundings/zg_12_DJF.txt",
+        zg_temp_12,
+        zg_rel_12,
+        levels,
+        title="F-test profila stvarnih vrijednosti i ERA5, Zagreb 12 UTC, 2011. - 2020. DJF",
+        season="DJF",
+    )
+    plt.savefig(
+        "images/profile_comparison_stddev/zg/ftest/profile_comparison_zg_12_DJF_ftest.png",
+        facecolor="white",
+        transparent=False,
+    )
+    plt.close()
+
+    graph.profile_comparison_ftest(
+        "data/soundings/zd.txt",
+        [zd_temp_00, zd_temp_12],
+        [zd_rel_00, zd_rel_12],
+        levels,
+        title="F-test profila stvarnih vrijednosti i ERA5, Zadar, 2011. - 2020.",
+    )
+    plt.savefig(
+        "images/profile_comparison_stddev/zd/ftest/profile_comparison_zd_mean_ftest.png",
+        facecolor="white",
+        transparent=False,
+    )
+    plt.close()
+
+    graph.profile_comparison_ftest(
+        "data/soundings/zd_JJA.txt",
+        [zd_temp_00, zd_temp_12],
+        [zd_rel_00, zd_rel_12],
+        levels,
+        title="F-test profila stvarnih vrijednosti i ERA5, Zadar, 2011. - 2020. JJA",
+        season="JJA",
+    )
+    plt.savefig(
+        "images/profile_comparison_stddev/zd/ftest/profile_comparison_zd_mean_JJA_ftest.png",
+        facecolor="white",
+        transparent=False,
+    )
+    plt.close()
+
+    graph.profile_comparison_ftest(
+        "data/soundings/zd_DJF.txt",
+        [zd_temp_00, zd_temp_12],
+        [zd_rel_00, zd_rel_12],
+        levels,
+        title="F-test profila stvarnih vrijednosti i ERA5, Zadar, 2011. - 2020. DJF",
+        season="DJF",
+    )
+    plt.savefig(
+        "images/profile_comparison_stddev/zd/ftest/profile_comparison_zd_mean_DJF_ftest.png",
+        facecolor="white",
+        transparent=False,
+    )
+    plt.close()
+
+    graph.profile_comparison_ftest(
+        "data/soundings/zd_00.txt",
+        zd_temp_00,
+        zd_rel_00,
+        levels,
+        title="F-test profila stvarnih vrijednosti i ERA5, Zadar 00 UTC, 2011. - 2020.",
+    )
+    plt.savefig(
+        "images/profile_comparison_stddev/zd/ftest/profile_comparison_zd_00_ftest.png",
+        facecolor="white",
+        transparent=False,
+    )
+    plt.close()
+
+    graph.profile_comparison_ftest(
+        "data/soundings/zd_00_JJA.txt",
+        zd_temp_00,
+        zd_rel_00,
+        levels,
+        title="F-test profila stvarnih vrijednosti i ERA5, Zadar 00 UTC, 2011. - 2020. JJA",
+        season="JJA",
+    )
+    plt.savefig(
+        "images/profile_comparison_stddev/zd/ftest/profile_comparison_zd_00_JJA_ftest.png",
+        facecolor="white",
+        transparent=False,
+    )
+    plt.close()
+
+    graph.profile_comparison_ftest(
+        "data/soundings/zd_00_DJF.txt",
+        zd_temp_00,
+        zd_rel_00,
+        levels,
+        title="F-test profila stvarnih vrijednosti i ERA5, Zadar 00 UTC, 2011. - 2020. DJF",
+        season="DJF",
+    )
+    plt.savefig(
+        "images/profile_comparison_stddev/zd/ftest/profile_comparison_zd_00_DJF_ftest.png",
+        facecolor="white",
+        transparent=False,
+    )
+    plt.close()
+
+    graph.profile_comparison_ftest(
+        "data/soundings/zd_12.txt",
+        zd_temp_12,
+        zd_rel_12,
+        levels,
+        title="F-test profila stvarnih vrijednosti i ERA5, Zadar 12 UTC, 2011. - 2020.",
+    )
+    plt.savefig(
+        "images/profile_comparison_stddev/zd/ftest/profile_comparison_zd_12_ftest.png",
+        facecolor="white",
+        transparent=False,
+    )
+    plt.close()
+
+    graph.profile_comparison_ftest(
+        "data/soundings/zd_12_JJA.txt",
+        zd_temp_12,
+        zd_rel_12,
+        levels,
+        title="F-test profila stvarnih vrijednosti i ERA5, Zadar 12 UTC, 2011. - 2020. JJA",
+        season="JJA",
+    )
+    plt.savefig(
+        "images/profile_comparison_stddev/zd/ftest/profile_comparison_zd_12_JJA_ftest.png",
+        facecolor="white",
+        transparent=False,
+    )
+    plt.close()
+
+    graph.profile_comparison_ftest(
+        "data/soundings/zd_12_DJF.txt",
+        zd_temp_12,
+        zd_rel_12,
+        levels,
+        title="F-test profila stvarnih vrijednosti i ERA5, Zadar 12 UTC, 2011. - 2020. DJF",
+        season="DJF",
+    )
+    plt.savefig(
+        "images/profile_comparison_stddev/zd/ftest/profile_comparison_zd_12_DJF_ftest.png",
         facecolor="white",
         transparent=False,
     )
