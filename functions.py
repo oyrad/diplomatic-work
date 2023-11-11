@@ -246,3 +246,44 @@ def get_profile_comparison_ftest(sondage_file, temp, rel, levels, season):
         rel_ftest.append(util.ftest(real_rel_current, era5_rel_current))
 
     return temp_ftest, rel_ftest
+
+def get_sounding_data_availability(sondage_file, city):
+    monthly_data_length = []
+    thirty_one_days = ["Jan", "Mar", "May", "Jul", "Aug", "Oct", "Dec"]
+    thirty_days = ["Apr", "Jun", "Sep", "Nov"]
+
+    if (city == "zg"):
+        month_position = 7
+        observation_potision = 3
+    else:
+        month_position = 6
+        observation_potision = 2
+
+    with open(sondage_file, "r") as file:
+
+        current_month = "Jan"
+        current_data_length = 0
+
+        for line in file:
+            columns = line.split()
+
+            if (len(columns) < 4):
+                continue
+
+            if (columns[observation_potision] == "Observations"):
+                if (columns[month_position] == current_month):
+                    current_data_length += 1
+                else:
+                    if (current_month in thirty_one_days):
+                        monthly_data_length.append(current_data_length / 62 * 100)
+                    elif (current_month in thirty_days):
+                        monthly_data_length.append(current_data_length / 60 * 100)
+                    else:
+                        monthly_data_length.append(current_data_length / 56 * 100)
+
+                    current_month = columns[month_position]
+                    current_data_length = 0
+
+    monthly_data_length.append(current_data_length / 62 * 100)
+
+    return monthly_data_length

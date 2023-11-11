@@ -65,6 +65,9 @@ zd_spec_00, zd_spec_12 = util.load_data("data/era5/zd_spec_00.nc", "q"), util.lo
     "data/era5/zd_spec_12.nc", "q"
 )
 
+def savefig(path):
+    plt.savefig(path, facecolor="white", transparent=False)
+
 
 def trend():
     graph.trend(
@@ -74,10 +77,7 @@ def trend():
         levels,
         "Trend, Zagreb, 1940. - 2022.",
     )
-    plt.savefig(
-        "images/trend/zg/trend_zg_mean.png", facecolor="white", transparent=False
-    )
-    plt.close()
+    savefig("images/trend/zg/trend_zg_mean.png")
 
     graph.trend(
         [zg_temp_00, zg_temp_12],
@@ -87,10 +87,7 @@ def trend():
         "Trend, Zagreb, 1940. - 2022. JJA",
         season="JJA",
     )
-    plt.savefig(
-        "images/trend/zg/trend_zg_mean_JJA.png", facecolor="white", transparent=False
-    )
-    plt.close()
+    savefig("images/trend/zg/trend_zg_mean_JJA.png")
 
     graph.trend(
         [zg_temp_00, zg_temp_12],
@@ -100,16 +97,12 @@ def trend():
         "Trend Zagreb, 1940. - 2022. DJF",
         season="DJF",
     )
-    plt.savefig(
-        "images/trend/zg/trend_zg_mean_DJF.png", facecolor="white", transparent=False
-    )
-    plt.close()
+    savefig("images/trend/zg/trend_zg_mean_DJF.png")
 
     graph.trend(
         zg_temp_00, zg_rel_00, zg_spec_00, levels, "Trend, Zagreb 00 UTC, 1940. - 2022."
     )
     plt.savefig("images/trend/zg/trend_zg_00.png", facecolor="white", transparent=False)
-    plt.close()
 
     graph.trend(
         zg_temp_00,
@@ -119,10 +112,7 @@ def trend():
         "Trend, Zagreb 00 UTC, 1940. - 2022. JJA",
         season="JJA",
     )
-    plt.savefig(
-        "images/trend/zg/trend_zg_00_JJA.png", facecolor="white", transparent=False
-    )
-    plt.close()
+    savefig("images/trend/zg/trend_zg_00_JJA.png")
 
     graph.trend(
         zg_temp_00,
@@ -132,16 +122,12 @@ def trend():
         "Trend, Zagreb 00 UTC, 1940. - 2022. DJF",
         season="DJF",
     )
-    plt.savefig(
-        "images/trend/zg/trend_zg_00_DJF.png", facecolor="white", transparent=False
-    )
-    plt.close()
+    savefig("images/trend/zg/trend_zg_00_DJF.png")
 
     graph.trend(
         zg_temp_12, zg_rel_12, zg_spec_12, levels, "Trend, Zagreb 12 UTC, 1940. - 2022."
     )
-    plt.savefig("images/trend/zg/trend_zg_12.png", facecolor="white", transparent=False)
-    plt.close()
+    savefig("images/trend/zg/trend_zg_12.png")
 
     graph.trend(
         zg_temp_12,
@@ -151,10 +137,7 @@ def trend():
         "Trend, Zagreb 12 UTC, 1940. - 2022. JJA",
         season="JJA",
     )
-    plt.savefig(
-        "images/trend/zg/trend_zg_12_JJA.png", facecolor="white", transparent=False
-    )
-    plt.close()
+    savefig("images/trend/zg/trend_zg_12_JJA.png")
 
     graph.trend(
         zg_temp_12,
@@ -164,10 +147,7 @@ def trend():
         "Trend, Zagreb 12 UTC, 1940. - 2022. DJF",
         season="DJF",
     )
-    plt.savefig(
-        "images/trend/zg/trend_zg_12_DJF.png", facecolor="white", transparent=False
-    )
-    plt.close()
+    savefig("images/trend/zg/trend_zg_12_DJF.png")
 
     graph.trend(
         [zd_temp_00, zd_temp_12],
@@ -176,10 +156,7 @@ def trend():
         levels,
         "Trend Zadar, 1940. - 2022.",
     )
-    plt.savefig(
-        "images/trend/zd/trend_zd_mean.png", facecolor="white", transparent=False
-    )
-    plt.close()
+    savefig("images/trend/zd/trend_zd_mean.png")
 
     graph.trend(
         [zd_temp_00, zd_temp_12],
@@ -189,10 +166,7 @@ def trend():
         "Trend, Zadar, 1940. - 2022. JJA",
         season="JJA",
     )
-    plt.savefig(
-        "images/trend/zd/trend_zd_mean_JJA.png", facecolor="white", transparent=False
-    )
-    plt.close()
+    savefig("images/trend/zd/trend_zd_mean_JJA.png")
 
     graph.trend(
         [zd_temp_00, zd_temp_12],
@@ -202,16 +176,12 @@ def trend():
         "Trend, Zadar, 1940. - 2022. DJF",
         season="DJF",
     )
-    plt.savefig(
-        "images/trend/zd/trend_zd_mean_DJF.png", facecolor="white", transparent=False
-    )
-    plt.close()
+    savefig("images/trend/zd/trend_zd_mean_DJF.png")
 
     graph.trend(
         zd_temp_00, zd_rel_00, zd_spec_00, levels, "Trend, Zadar 00 UTC, 1940. - 2022."
     )
-    plt.savefig("images/trend/zd/trend_zd_00.png", facecolor="white", transparent=False)
-    plt.close()
+    savefig("images/trend/zd/trend_zd_00.png")
 
     graph.trend(
         zd_temp_00,
@@ -221,10 +191,7 @@ def trend():
         "Trend, Zadar 00 UTC, 1940. - 2022. JJA",
         season="JJA",
     )
-    plt.savefig(
-        "images/trend/zd/trend_zd_00_JJA.png", facecolor="white", transparent=False
-    )
-    plt.close()
+    savefig("images/trend/zd/trend_zd_00_JJA.png")
 
     graph.trend(
         zd_temp_00,
@@ -234,16 +201,12 @@ def trend():
         "Trend, Zadar 00 UTC, 1940. - 2022. DJF",
         season="DJF",
     )
-    plt.savefig(
-        "images/trend/zd/trend_zd_00_DJF.png", facecolor="white", transparent=False
-    )
-    plt.close()
+    savefig("images/trend/zd/trend_zd_00_DJF.png")
 
     graph.trend(
         zd_temp_12, zd_rel_12, zd_spec_12, levels, "Trend, Zadar 12 UTC, 1940. - 2022."
     )
-    plt.savefig("images/trend/zd/trend_zd_12.png", facecolor="white", transparent=False)
-    plt.close()
+    savefig("images/trend/zd/trend_zd_12.png")
 
     graph.trend(
         zd_temp_12,
@@ -253,10 +216,7 @@ def trend():
         "Trend, Zadar 12 UTC, 1940. - 2022. JJA",
         season="JJA",
     )
-    plt.savefig(
-        "images/trend/zd/trend_zd_12_JJA.png", facecolor="white", transparent=False
-    )
-    plt.close()
+    savefig("images/trend/zd/trend_zd_12_JJA.png")
 
     graph.trend(
         zd_temp_12,
@@ -266,10 +226,9 @@ def trend():
         "Trend, Zadar 12 UTC, 1940. - 2022. DJF",
         season="DJF",
     )
-    plt.savefig(
-        "images/trend/zd/trend_zd_12_DJF.png", facecolor="white", transparent=False
-    )
-    plt.close()
+    savefig("images/trend/zd/trend_zd_12_DJF.png")
+
+    plt.close("all")
 
 
 def trend_ttest():
@@ -280,12 +239,7 @@ def trend_ttest():
         levels,
         "Trend t-test, Zagreb, 1940. - 2022.",
     )
-    plt.savefig(
-        "images/trend/zg/ttest/trend_zg_mean_ttest.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/trend/zg/ttest/trend_zg_mean_ttest.png")
 
     graph.ttest(
         [zg_temp_00, zg_temp_12],
@@ -295,12 +249,7 @@ def trend_ttest():
         "Trend t-test, Zagreb, 1940. - 2022. JJA",
         season="JJA",
     )
-    plt.savefig(
-        "images/trend/zg/ttest/trend_zg_mean_JJA_ttest.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/trend/zg/ttest/trend_zg_mean_JJA_ttest.png")
 
     graph.ttest(
         [zg_temp_00, zg_temp_12],
@@ -310,12 +259,7 @@ def trend_ttest():
         "Trend t-test, Zagreb, 1940. - 2022. DJF",
         season="DJF",
     )
-    plt.savefig(
-        "images/trend/zg/ttest/trend_zg_mean_DJF_ttest.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/trend/zg/ttest/trend_zg_mean_DJF_ttest.png")
 
     graph.ttest(
         zg_temp_00,
@@ -324,12 +268,7 @@ def trend_ttest():
         levels,
         "Trend t-test, Zagreb 00 UTC, 1940. - 2022.",
     )
-    plt.savefig(
-        "images/trend/zg/ttest/trend_zg_00_ttest.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/trend/zg/ttest/trend_zg_00_ttest.png")
 
     graph.ttest(
         zg_temp_00,
@@ -339,12 +278,7 @@ def trend_ttest():
         "Trend t-test, Zagreb 00 UTC, 1940. - 2022. JJA",
         season="JJA",
     )
-    plt.savefig(
-        "images/trend/zg/ttest/trend_zg_00_JJA_ttest.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/trend/zg/ttest/trend_zg_00_JJA_ttest.png")
 
     graph.ttest(
         zg_temp_00,
@@ -354,12 +288,7 @@ def trend_ttest():
         "Trend t-test, Zagreb 00 UTC, 1940. - 2022. DJF",
         season="DJF",
     )
-    plt.savefig(
-        "images/trend/zg/ttest/trend_zg_00_DJF_ttest.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/trend/zg/ttest/trend_zg_00_DJF_ttest.png")
 
     graph.ttest(
         zg_temp_12,
@@ -368,12 +297,7 @@ def trend_ttest():
         levels,
         "Trend t-test, Zagreb 12 UTC, 1940. - 2022.",
     )
-    plt.savefig(
-        "images/trend/zg/ttest/trend_zg_12_ttest.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/trend/zg/ttest/trend_zg_12_ttest.png")
 
     graph.ttest(
         zg_temp_12,
@@ -383,12 +307,7 @@ def trend_ttest():
         "Trend t-test, Zagreb 12 UTC, 1940. - 2022. JJA",
         season="JJA",
     )
-    plt.savefig(
-        "images/trend/zg/ttest/trend_zg_12_JJA_ttest.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/trend/zg/ttest/trend_zg_12_JJA_ttest.png")
 
     graph.ttest(
         zg_temp_12,
@@ -398,12 +317,7 @@ def trend_ttest():
         "Trend t-test, Zagreb 12 UTC, 1940. - 2022. DJF",
         season="DJF",
     )
-    plt.savefig(
-        "images/trend/zg/ttest/trend_zg_12_DJF_ttest.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/trend/zg/ttest/trend_zg_12_DJF_ttest.png")
 
     graph.ttest(
         [zd_temp_00, zd_temp_12],
@@ -412,12 +326,7 @@ def trend_ttest():
         levels,
         "Trend t-test, Zadar, 1940. - 2022.",
     )
-    plt.savefig(
-        "images/trend/zd/ttest/trend_zd_mean_ttest.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/trend/zd/ttest/trend_zd_mean_ttest.png")
 
     graph.ttest(
         [zd_temp_00, zd_temp_12],
@@ -427,12 +336,7 @@ def trend_ttest():
         "Trend t-test, Zadar, 1940. - 2022. JJA",
         season="JJA",
     )
-    plt.savefig(
-        "images/trend/zd/ttest/trend_zd_mean_JJA_ttest.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/trend/zd/ttest/trend_zd_mean_JJA_ttest.png")
 
     graph.ttest(
         [zd_temp_00, zd_temp_12],
@@ -442,12 +346,7 @@ def trend_ttest():
         "Trend t-test, Zadar, 1940. - 2022. DJF",
         season="DJF",
     )
-    plt.savefig(
-        "images/trend/zd/ttest/trend_zd_mean_DJF_ttest.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/trend/zd/ttest/trend_zd_mean_DJF_ttest.png")
 
     graph.ttest(
         zd_temp_00,
@@ -456,12 +355,7 @@ def trend_ttest():
         levels,
         "Trend t-test, Zadar 00 UTC, 1940. - 2022.",
     )
-    plt.savefig(
-        "images/trend/zd/ttest/trend_zd_00_ttest.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/trend/zd/ttest/trend_zd_00_ttest.png")
 
     graph.ttest(
         zd_temp_00,
@@ -471,12 +365,7 @@ def trend_ttest():
         "Trend t-test, Zadar 00 UTC, 1940. - 2022. JJA",
         season="JJA",
     )
-    plt.savefig(
-        "images/trend/zd/ttest/trend_zd_00_JJA_ttest.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/trend/zd/ttest/trend_zd_00_JJA_ttest.png")
 
     graph.ttest(
         zd_temp_00,
@@ -486,12 +375,7 @@ def trend_ttest():
         "Trend t-test, Zadar 00 UTC, 1940. - 2022. DJF",
         season="DJF",
     )
-    plt.savefig(
-        "images/trend/zd/ttest/trend_zd_00_DJF_ttest.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/trend/zd/ttest/trend_zd_00_DJF_ttest.png")
 
     graph.ttest(
         zd_temp_12,
@@ -500,12 +384,7 @@ def trend_ttest():
         levels,
         "Trend t-test, Zadar 12 UTC, 1940. - 2022.",
     )
-    plt.savefig(
-        "images/trend/zd/ttest/trend_zd_12_ttest.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/trend/zd/ttest/trend_zd_12_ttest.png")
 
     graph.ttest(
         zd_temp_12,
@@ -515,12 +394,7 @@ def trend_ttest():
         "Trend t-test, Zadar 12 UTC, 1940. - 2022. JJA",
         season="JJA",
     )
-    plt.savefig(
-        "images/trend/zd/ttest/trend_zd_12_JJA_ttest.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/trend/zd/ttest/trend_zd_12_JJA_ttest.png")
 
     graph.ttest(
         zd_temp_12,
@@ -530,12 +404,9 @@ def trend_ttest():
         "Trend t-test, Zadar 12 UTC, 1940. - 2022. DJF",
         season="DJF",
     )
-    plt.savefig(
-        "images/trend/zd/ttest/trend_zd_12_DJF_ttest.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/trend/zd/ttest/trend_zd_12_DJF_ttest.png")
+
+    plt.close("all")
 
 
 def hovmoeller():
@@ -546,12 +417,7 @@ def hovmoeller():
         cmap_label=r"[$^{\circ}$ C]",
         title="Temperatura, Zagreb",
     )
-    plt.savefig(
-        "images/hovmoeller/temp/zg/hov_temp_zg_mean.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/hovmoeller/temp/zg/hov_temp_zg_mean.png")
 
     graph.hovmoeller(
         [zg_temp_00, zg_temp_12],
@@ -561,12 +427,7 @@ def hovmoeller():
         title="Temperatura, Zagreb, JJA",
         season="JJA",
     )
-    plt.savefig(
-        "images/hovmoeller/temp/zg/hov_temp_zg_mean_JJA.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/hovmoeller/temp/zg/hov_temp_zg_mean_JJA.png")
 
     graph.hovmoeller(
         [zg_temp_00, zg_temp_12],
@@ -576,12 +437,7 @@ def hovmoeller():
         title="Temperatura, Zagreb, DJF",
         season="DJF",
     )
-    plt.savefig(
-        "images/hovmoeller/temp/zg/hov_temp_zg_mean_DJF.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/hovmoeller/temp/zg/hov_temp_zg_mean_DJF.png")
 
     graph.hovmoeller(
         [zg_rel_00, zg_rel_12],
@@ -590,12 +446,7 @@ def hovmoeller():
         cmap_label="[%]",
         title="Relativna vlažnost, Zagreb",
     )
-    plt.savefig(
-        "images/hovmoeller/rel/zg/hov_rel_zg_mean.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/hovmoeller/rel/zg/hov_rel_zg_mean.png")
 
     graph.hovmoeller(
         [zg_rel_00, zg_rel_12],
@@ -605,12 +456,7 @@ def hovmoeller():
         title="Relativna vlažnost, Zagreb, JJA",
         season="JJA",
     )
-    plt.savefig(
-        "images/hovmoeller/rel/zg/hov_rel_zg_mean_JJA.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/hovmoeller/rel/zg/hov_rel_zg_mean_JJA.png")
 
     graph.hovmoeller(
         [zg_rel_00, zg_rel_12],
@@ -620,12 +466,7 @@ def hovmoeller():
         title="Relativna vlažnost, Zagreb, DJF",
         season="DJF",
     )
-    plt.savefig(
-        "images/hovmoeller/rel/zg/hov_rel_zg_mean_DJF.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/hovmoeller/rel/zg/hov_rel_zg_mean_DJF.png")
 
     graph.hovmoeller(
         [zg_spec_00, zg_spec_12],
@@ -634,12 +475,7 @@ def hovmoeller():
         cmap_label="[g/kg]",
         title="Specifična vlažnost, Zagreb",
     )
-    plt.savefig(
-        "images/hovmoeller/spec/zg/hov_spec_zg_mean.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/hovmoeller/spec/zg/hov_spec_zg_mean.png")
 
     graph.hovmoeller(
         [zg_spec_00, zg_spec_12],
@@ -649,12 +485,7 @@ def hovmoeller():
         title="Specifična vlažnost, Zagreb, JJA",
         season="JJA",
     )
-    plt.savefig(
-        "images/hovmoeller/spec/zg/hov_spec_zg_mean_JJA.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/hovmoeller/spec/zg/hov_spec_zg_mean_JJA.png")
 
     graph.hovmoeller(
         [zg_spec_00, zg_spec_12],
@@ -664,12 +495,7 @@ def hovmoeller():
         title="Specifična vlažnost, Zagreb, DJF",
         season="DJF",
     )
-    plt.savefig(
-        "images/hovmoeller/spec/zg/hov_spec_zg_mean_DJF.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/hovmoeller/spec/zg/hov_spec_zg_mean_DJF.png")
 
     graph.hovmoeller(
         zg_temp_00,
@@ -678,12 +504,7 @@ def hovmoeller():
         cmap_label=r"[$^{\circ}$ C]",
         title="Temperatura, Zagreb 00 UTC",
     )
-    plt.savefig(
-        "images/hovmoeller/temp/zg/hov_temp_zg_00.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/hovmoeller/temp/zg/hov_temp_zg_00.png")
 
     graph.hovmoeller(
         zg_temp_00,
@@ -693,12 +514,7 @@ def hovmoeller():
         title="Temperatura, Zagreb 00 UTC, JJA",
         season="JJA",
     )
-    plt.savefig(
-        "images/hovmoeller/temp/zg/hov_temp_zg_00_JJA.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/hovmoeller/temp/zg/hov_temp_zg_00_JJA.png")
 
     graph.hovmoeller(
         zg_temp_00,
@@ -708,12 +524,7 @@ def hovmoeller():
         title="Temperatura, Zagreb 00 UTC, DJF",
         season="DJF",
     )
-    plt.savefig(
-        "images/hovmoeller/temp/zg/hov_temp_zg_00_DJF.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/hovmoeller/temp/zg/hov_temp_zg_00_DJF.png")
 
     graph.hovmoeller(
         zg_rel_00,
@@ -722,12 +533,7 @@ def hovmoeller():
         cmap_label="[%]",
         title="Relativna vlažnost, Zagreb 00 UTC",
     )
-    plt.savefig(
-        "images/hovmoeller/rel/zg/hov_rel_zg_00.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/hovmoeller/rel/zg/hov_rel_zg_00.png")
 
     graph.hovmoeller(
         zg_rel_00,
@@ -737,12 +543,7 @@ def hovmoeller():
         title="Relativna vlažnost, Zagreb 00 UTC, JJA",
         season="JJA",
     )
-    plt.savefig(
-        "images/hovmoeller/rel/zg/hov_rel_zg_00_JJA.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/hovmoeller/rel/zg/hov_rel_zg_00_JJA.png")
 
     graph.hovmoeller(
         zg_rel_00,
@@ -752,12 +553,7 @@ def hovmoeller():
         title="Relativna vlažnost, Zagreb 00 UTC, DJF",
         season="DJF",
     )
-    plt.savefig(
-        "images/hovmoeller/rel/zg/hov_rel_zg_00_DJF.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/hovmoeller/rel/zg/hov_rel_zg_00_DJF.png")
 
     graph.hovmoeller(
         zg_spec_00,
@@ -766,12 +562,7 @@ def hovmoeller():
         cmap_label="[g/kg]",
         title="Specifična vlažnost, Zagreb 00 UTC",
     )
-    plt.savefig(
-        "images/hovmoeller/spec/zg/hov_spec_zg_00.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/hovmoeller/spec/zg/hov_spec_zg_00.png")
 
     graph.hovmoeller(
         zg_spec_00,
@@ -781,12 +572,7 @@ def hovmoeller():
         title="Specifična vlažnost, Zagreb 00 UTC, JJA",
         season="JJA",
     )
-    plt.savefig(
-        "images/hovmoeller/spec/zg/hov_spec_zg_00_JJA.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/hovmoeller/spec/zg/hov_spec_zg_00_JJA.png")
 
     graph.hovmoeller(
         zg_spec_00,
@@ -796,12 +582,7 @@ def hovmoeller():
         title="Specifična vlažnost, Zagreb 00 UTC, DJF",
         season="DJF",
     )
-    plt.savefig(
-        "images/hovmoeller/spec/zg/hov_spec_zg_00_DJF.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/hovmoeller/spec/zg/hov_spec_zg_00_DJF.png")
 
     graph.hovmoeller(
         zg_temp_12,
@@ -810,12 +591,7 @@ def hovmoeller():
         cmap_label=r"[$^{\circ}$ C]",
         title="Temperatura, Zagreb 12 UTC",
     )
-    plt.savefig(
-        "images/hovmoeller/temp/zg/hov_temp_zg_12.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/hovmoeller/temp/zg/hov_temp_zg_12.png")
 
     graph.hovmoeller(
         zg_temp_12,
@@ -825,12 +601,7 @@ def hovmoeller():
         title="Temperatura, Zagreb 12 UTC, JJA",
         season="JJA",
     )
-    plt.savefig(
-        "images/hovmoeller/temp/zg/hov_temp_zg_12_JJA.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/hovmoeller/temp/zg/hov_temp_zg_12_JJA.png")
 
     graph.hovmoeller(
         zg_temp_12,
@@ -840,12 +611,7 @@ def hovmoeller():
         title="Temperatura, Zagreb 12 UTC, DJF",
         season="DJF",
     )
-    plt.savefig(
-        "images/hovmoeller/temp/zg/hov_temp_zg_12_DJF.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/hovmoeller/temp/zg/hov_temp_zg_12_DJF.png")
 
     graph.hovmoeller(
         zg_rel_12,
@@ -854,12 +620,7 @@ def hovmoeller():
         cmap_label="[%]",
         title="Relativna vlažnost, Zagreb 12 UTC",
     )
-    plt.savefig(
-        "images/hovmoeller/rel/zg/hov_rel_zg_12.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/hovmoeller/rel/zg/hov_rel_zg_12.png")
 
     graph.hovmoeller(
         zg_rel_12,
@@ -869,12 +630,7 @@ def hovmoeller():
         title="Relativna vlažnost, Zagreb 12 UTC, JJA",
         season="JJA",
     )
-    plt.savefig(
-        "images/hovmoeller/rel/zg/hov_rel_zg_12_JJA.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/hovmoeller/rel/zg/hov_rel_zg_12_JJA.png")
 
     graph.hovmoeller(
         zg_rel_12,
@@ -884,12 +640,7 @@ def hovmoeller():
         title="Relativna vlažnost, Zagreb 12 UTC, DJF",
         season="DJF",
     )
-    plt.savefig(
-        "images/hovmoeller/rel/zg/hov_rel_zg_12_DJF.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/hovmoeller/rel/zg/hov_rel_zg_12_DJF.png")
 
     graph.hovmoeller(
         zg_spec_12,
@@ -898,12 +649,7 @@ def hovmoeller():
         cmap_label="[g/kg]",
         title="Specifična vlažnost, Zagreb 12 UTC",
     )
-    plt.savefig(
-        "images/hovmoeller/spec/zg/hov_spec_zg_12.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/hovmoeller/spec/zg/hov_spec_zg_12.png")
 
     graph.hovmoeller(
         zg_spec_12,
@@ -913,12 +659,7 @@ def hovmoeller():
         title="Specifična vlažnost, Zagreb 12 UTC, JJA",
         season="JJA",
     )
-    plt.savefig(
-        "images/hovmoeller/spec/zg/hov_spec_zg_12_JJA.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/hovmoeller/spec/zg/hov_spec_zg_12_JJA.png")
 
     graph.hovmoeller(
         zg_spec_12,
@@ -928,12 +669,7 @@ def hovmoeller():
         title="Specifična vlažnost, Zagreb 12 UTC, DJF",
         season="DJF",
     )
-    plt.savefig(
-        "images/hovmoeller/spec/zg/hov_spec_zg_12_DJF.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/hovmoeller/spec/zg/hov_spec_zg_12_DJF.png")
 
     graph.hovmoeller(
         [zd_temp_00, zd_temp_12],
@@ -942,12 +678,7 @@ def hovmoeller():
         cmap_label=r"[$^{\circ}$ C]",
         title="Temperatura, Zadar",
     )
-    plt.savefig(
-        "images/hovmoeller/temp/zd/hov_temp_zd_mean.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/hovmoeller/temp/zd/hov_temp_zd_mean.png")
 
     graph.hovmoeller(
         [zd_temp_00, zd_temp_12],
@@ -957,12 +688,7 @@ def hovmoeller():
         title="Temperatura, Zadar, JJA",
         season="JJA",
     )
-    plt.savefig(
-        "images/hovmoeller/temp/zd/hov_temp_zd_mean_JJA.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/hovmoeller/temp/zd/hov_temp_zd_mean_JJA.png")
 
     graph.hovmoeller(
         [zd_temp_00, zd_temp_12],
@@ -977,7 +703,6 @@ def hovmoeller():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.hovmoeller(
         [zd_rel_00, zd_rel_12],
@@ -991,7 +716,6 @@ def hovmoeller():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.hovmoeller(
         [zd_rel_00, zd_rel_12],
@@ -1006,7 +730,6 @@ def hovmoeller():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.hovmoeller(
         [zd_rel_00, zd_rel_12],
@@ -1021,7 +744,6 @@ def hovmoeller():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.hovmoeller(
         [zd_spec_00, zd_spec_12],
@@ -1035,7 +757,6 @@ def hovmoeller():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.hovmoeller(
         [zd_spec_00, zd_spec_12],
@@ -1050,7 +771,6 @@ def hovmoeller():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.hovmoeller(
         [zd_spec_00, zd_spec_12],
@@ -1065,7 +785,6 @@ def hovmoeller():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.hovmoeller(
         zd_temp_00,
@@ -1079,7 +798,6 @@ def hovmoeller():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.hovmoeller(
         zd_temp_00,
@@ -1094,7 +812,6 @@ def hovmoeller():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.hovmoeller(
         zd_temp_00,
@@ -1109,7 +826,6 @@ def hovmoeller():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.hovmoeller(
         zd_rel_00,
@@ -1123,8 +839,6 @@ def hovmoeller():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
-
     graph.hovmoeller(
         zd_rel_00,
         levels,
@@ -1138,7 +852,6 @@ def hovmoeller():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.hovmoeller(
         zd_rel_00,
@@ -1153,7 +866,6 @@ def hovmoeller():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.hovmoeller(
         zd_spec_00,
@@ -1167,7 +879,6 @@ def hovmoeller():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.hovmoeller(
         zd_spec_00,
@@ -1182,7 +893,6 @@ def hovmoeller():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.hovmoeller(
         zd_spec_00,
@@ -1197,7 +907,6 @@ def hovmoeller():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.hovmoeller(
         zd_temp_12,
@@ -1211,7 +920,6 @@ def hovmoeller():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.hovmoeller(
         zd_temp_12,
@@ -1226,7 +934,6 @@ def hovmoeller():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.hovmoeller(
         zd_temp_12,
@@ -1241,7 +948,6 @@ def hovmoeller():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.hovmoeller(
         zd_rel_12,
@@ -1255,7 +961,6 @@ def hovmoeller():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.hovmoeller(
         zd_rel_12,
@@ -1270,7 +975,6 @@ def hovmoeller():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.hovmoeller(
         zd_rel_12,
@@ -1285,7 +989,6 @@ def hovmoeller():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.hovmoeller(
         zd_spec_12,
@@ -1299,7 +1002,6 @@ def hovmoeller():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.hovmoeller(
         zd_spec_12,
@@ -1314,7 +1016,6 @@ def hovmoeller():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.hovmoeller(
         zd_spec_12,
@@ -1329,7 +1030,8 @@ def hovmoeller():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
+
+    plt.close("all")
 
 
 def profile_comparison():
@@ -1345,7 +1047,6 @@ def profile_comparison():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison(
         "data/soundings/zg_JJA.txt",
@@ -1360,7 +1061,6 @@ def profile_comparison():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison(
         "data/soundings/zg_DJF.txt",
@@ -1375,7 +1075,6 @@ def profile_comparison():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison(
         "data/soundings/zg_00.txt",
@@ -1389,7 +1088,6 @@ def profile_comparison():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison(
         "data/soundings/zg_00_JJA.txt",
@@ -1404,7 +1102,6 @@ def profile_comparison():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison(
         "data/soundings/zg_00_DJF.txt",
@@ -1419,7 +1116,6 @@ def profile_comparison():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison(
         "data/soundings/zg_12.txt",
@@ -1433,7 +1129,6 @@ def profile_comparison():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison(
         "data/soundings/zg_12_JJA.txt",
@@ -1448,7 +1143,6 @@ def profile_comparison():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison(
         "data/soundings/zg_12_DJF.txt",
@@ -1463,7 +1157,6 @@ def profile_comparison():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison(
         "data/soundings/zd.txt",
@@ -1477,7 +1170,6 @@ def profile_comparison():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison(
         "data/soundings/zd_JJA.txt",
@@ -1492,7 +1184,6 @@ def profile_comparison():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison(
         "data/soundings/zd_DJF.txt",
@@ -1507,7 +1198,6 @@ def profile_comparison():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison(
         "data/soundings/zd_00.txt",
@@ -1521,7 +1211,6 @@ def profile_comparison():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison(
         "data/soundings/zd_00_JJA.txt",
@@ -1536,7 +1225,6 @@ def profile_comparison():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison(
         "data/soundings/zd_00_DJF.txt",
@@ -1551,7 +1239,6 @@ def profile_comparison():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison(
         "data/soundings/zd_12.txt",
@@ -1565,7 +1252,6 @@ def profile_comparison():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison(
         "data/soundings/zd_12_JJA.txt",
@@ -1580,7 +1266,6 @@ def profile_comparison():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison(
         "data/soundings/zd_12_DJF.txt",
@@ -1595,7 +1280,8 @@ def profile_comparison():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
+
+    plt.close("all")
 
 
 def profile_comparison_ttest():
@@ -1611,7 +1297,6 @@ def profile_comparison_ttest():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison_ttest(
         "data/soundings/zg_JJA.txt",
@@ -1626,7 +1311,6 @@ def profile_comparison_ttest():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison_ttest(
         "data/soundings/zg_DJF.txt",
@@ -1641,7 +1325,6 @@ def profile_comparison_ttest():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison_ttest(
         "data/soundings/zg_00.txt",
@@ -1655,7 +1338,6 @@ def profile_comparison_ttest():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison_ttest(
         "data/soundings/zg_00_JJA.txt",
@@ -1670,7 +1352,6 @@ def profile_comparison_ttest():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison_ttest(
         "data/soundings/zg_00_DJF.txt",
@@ -1685,7 +1366,6 @@ def profile_comparison_ttest():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison_ttest(
         "data/soundings/zg_12.txt",
@@ -1699,7 +1379,6 @@ def profile_comparison_ttest():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison_ttest(
         "data/soundings/zg_12_JJA.txt",
@@ -1714,7 +1393,6 @@ def profile_comparison_ttest():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison_ttest(
         "data/soundings/zg_12_DJF.txt",
@@ -1729,7 +1407,6 @@ def profile_comparison_ttest():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison_ttest(
         "data/soundings/zd.txt",
@@ -1743,7 +1420,6 @@ def profile_comparison_ttest():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison_ttest(
         "data/soundings/zd_JJA.txt",
@@ -1757,7 +1433,6 @@ def profile_comparison_ttest():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison_ttest(
         "data/soundings/zd_DJF.txt",
@@ -1771,7 +1446,6 @@ def profile_comparison_ttest():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison_ttest(
         "data/soundings/zd_00.txt",
@@ -1785,7 +1459,6 @@ def profile_comparison_ttest():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison_ttest(
         "data/soundings/zd_00_JJA.txt",
@@ -1800,7 +1473,6 @@ def profile_comparison_ttest():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison_ttest(
         "data/soundings/zd_00_DJF.txt",
@@ -1815,7 +1487,6 @@ def profile_comparison_ttest():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison_ttest(
         "data/soundings/zd_12.txt",
@@ -1829,7 +1500,6 @@ def profile_comparison_ttest():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison_ttest(
         "data/soundings/zd_12_JJA.txt",
@@ -1844,7 +1514,6 @@ def profile_comparison_ttest():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison_ttest(
         "data/soundings/zd_12_DJF.txt",
@@ -1859,7 +1528,8 @@ def profile_comparison_ttest():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
+
+    plt.close("all")
 
 
 def profile_comparison_stddev():
@@ -1875,7 +1545,6 @@ def profile_comparison_stddev():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison_stddev(
         "data/soundings/zg_JJA.txt",
@@ -1890,7 +1559,6 @@ def profile_comparison_stddev():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison_stddev(
         "data/soundings/zg_DJF.txt",
@@ -1905,7 +1573,6 @@ def profile_comparison_stddev():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison_stddev(
         "data/soundings/zg_00.txt",
@@ -1919,7 +1586,6 @@ def profile_comparison_stddev():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison_stddev(
         "data/soundings/zg_00_JJA.txt",
@@ -1934,7 +1600,6 @@ def profile_comparison_stddev():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison_stddev(
         "data/soundings/zg_00_DJF.txt",
@@ -1949,7 +1614,6 @@ def profile_comparison_stddev():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison_stddev(
         "data/soundings/zg_12.txt",
@@ -1963,7 +1627,6 @@ def profile_comparison_stddev():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison_stddev(
         "data/soundings/zg_12_JJA.txt",
@@ -1978,7 +1641,6 @@ def profile_comparison_stddev():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison_stddev(
         "data/soundings/zg_12_DJF.txt",
@@ -1993,7 +1655,6 @@ def profile_comparison_stddev():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison_stddev(
         "data/soundings/zd.txt",
@@ -2007,7 +1668,6 @@ def profile_comparison_stddev():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison_stddev(
         "data/soundings/zd_JJA.txt",
@@ -2022,7 +1682,6 @@ def profile_comparison_stddev():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison_stddev(
         "data/soundings/zd_DJF.txt",
@@ -2037,7 +1696,6 @@ def profile_comparison_stddev():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison_stddev(
         "data/soundings/zd_00.txt",
@@ -2051,7 +1709,6 @@ def profile_comparison_stddev():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison_stddev(
         "data/soundings/zd_00_JJA.txt",
@@ -2066,7 +1723,6 @@ def profile_comparison_stddev():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison_stddev(
         "data/soundings/zd_00_DJF.txt",
@@ -2081,7 +1737,6 @@ def profile_comparison_stddev():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison_stddev(
         "data/soundings/zd_12.txt",
@@ -2095,7 +1750,6 @@ def profile_comparison_stddev():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison_stddev(
         "data/soundings/zd_12_JJA.txt",
@@ -2110,7 +1764,6 @@ def profile_comparison_stddev():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
 
     graph.profile_comparison_stddev(
         "data/soundings/zd_12_DJF.txt",
@@ -2125,7 +1778,8 @@ def profile_comparison_stddev():
         facecolor="white",
         transparent=False,
     )
-    plt.close()
+
+    plt.close("all")
 
 
 def profile_comparison_ftest():
@@ -2136,12 +1790,7 @@ def profile_comparison_ftest():
         levels,
         title="F-test profila stvarnih vrijednosti i ERA5, Zagreb, 2011. - 2020.",
     )
-    plt.savefig(
-        "images/profile_comparison_stddev/zg/ftest/profile_comparison_zg_mean_ftest.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/profile_comparison_stddev/zg/ftest/profile_comparison_zg_mean_ftest.png")
 
     graph.profile_comparison_ftest(
         "data/soundings/zg_JJA.txt",
@@ -2151,12 +1800,7 @@ def profile_comparison_ftest():
         title="F-test profila stvarnih vrijednosti i ERA5, Zagreb, 2011. - 2020. JJA",
         season="JJA",
     )
-    plt.savefig(
-        "images/profile_comparison_stddev/zg/ftest/profile_comparison_zg_mean_JJA_ftest.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/profile_comparison_stddev/zg/ftest/profile_comparison_zg_mean_JJA_ftest.png")
 
     graph.profile_comparison_ftest(
         "data/soundings/zg_DJF.txt",
@@ -2166,12 +1810,7 @@ def profile_comparison_ftest():
         title="F-test profila stvarnih vrijednosti i ERA5, Zagreb, 2011. - 2020. DJF",
         season="DJF",
     )
-    plt.savefig(
-        "images/profile_comparison_stddev/zg/ftest/profile_comparison_zg_mean_DJF_ftest.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/profile_comparison_stddev/zg/ftest/profile_comparison_zg_mean_DJF_ftest.png")
 
     graph.profile_comparison_ftest(
         "data/soundings/zg_00.txt",
@@ -2180,12 +1819,7 @@ def profile_comparison_ftest():
         levels,
         title="F-test profila stvarnih vrijednosti i ERA5, Zagreb 00 UTC, 2011. - 2020.",
     )
-    plt.savefig(
-        "images/profile_comparison_stddev/zg/ftest/profile_comparison_zg_00_ftest.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/profile_comparison_stddev/zg/ftest/profile_comparison_zg_00_ftest.png")
 
     graph.profile_comparison_ftest(
         "data/soundings/zg_00_JJA.txt",
@@ -2195,12 +1829,7 @@ def profile_comparison_ftest():
         title="F-test profila stvarnih vrijednosti i ERA5, Zagreb 00 UTC, 2011. - 2020. JJA",
         season="JJA",
     )
-    plt.savefig(
-        "images/profile_comparison_stddev/zg/ftest/profile_comparison_zg_00_JJA_ftest.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/profile_comparison_stddev/zg/ftest/profile_comparison_zg_00_JJA_ftest.png")
 
     graph.profile_comparison_ftest(
         "data/soundings/zg_00_DJF.txt",
@@ -2210,12 +1839,7 @@ def profile_comparison_ftest():
         title="F-test profila stvarnih vrijednosti i ERA5, Zagreb 00 UTC, 2011. - 2020. DJF",
         season="DJF",
     )
-    plt.savefig(
-        "images/profile_comparison_stddev/zg/ftest/profile_comparison_zg_00_DJF_ftest.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/profile_comparison_stddev/zg/ftest/profile_comparison_zg_00_DJF_ftest.png")
 
     graph.profile_comparison_ftest(
         "data/soundings/zg_12.txt",
@@ -2224,12 +1848,7 @@ def profile_comparison_ftest():
         levels,
         title="F-test profila stvarnih vrijednosti i ERA5, Zagreb 12 UTC, 2011. - 2020.",
     )
-    plt.savefig(
-        "images/profile_comparison_stddev/zg/ftest/profile_comparison_zg_12_ftest.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/profile_comparison_stddev/zg/ftest/profile_comparison_zg_12_ftest.png")
 
     graph.profile_comparison_ftest(
         "data/soundings/zg_12_JJA.txt",
@@ -2239,12 +1858,7 @@ def profile_comparison_ftest():
         title="F-test profila stvarnih vrijednosti i ERA5, Zagreb 12 UTC, 2011. - 2020. JJA",
         season="JJA",
     )
-    plt.savefig(
-        "images/profile_comparison_stddev/zg/ftest/profile_comparison_zg_12_JJA_ftest.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/profile_comparison_stddev/zg/ftest/profile_comparison_zg_12_JJA_ftest.png")
 
     graph.profile_comparison_ftest(
         "data/soundings/zg_12_DJF.txt",
@@ -2254,12 +1868,7 @@ def profile_comparison_ftest():
         title="F-test profila stvarnih vrijednosti i ERA5, Zagreb 12 UTC, 2011. - 2020. DJF",
         season="DJF",
     )
-    plt.savefig(
-        "images/profile_comparison_stddev/zg/ftest/profile_comparison_zg_12_DJF_ftest.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/profile_comparison_stddev/zg/ftest/profile_comparison_zg_12_DJF_ftest.png")
 
     graph.profile_comparison_ftest(
         "data/soundings/zd.txt",
@@ -2268,12 +1877,7 @@ def profile_comparison_ftest():
         levels,
         title="F-test profila stvarnih vrijednosti i ERA5, Zadar, 2011. - 2020.",
     )
-    plt.savefig(
-        "images/profile_comparison_stddev/zd/ftest/profile_comparison_zd_mean_ftest.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/profile_comparison_stddev/zd/ftest/profile_comparison_zd_mean_ftest.png")
 
     graph.profile_comparison_ftest(
         "data/soundings/zd_JJA.txt",
@@ -2283,12 +1887,7 @@ def profile_comparison_ftest():
         title="F-test profila stvarnih vrijednosti i ERA5, Zadar, 2011. - 2020. JJA",
         season="JJA",
     )
-    plt.savefig(
-        "images/profile_comparison_stddev/zd/ftest/profile_comparison_zd_mean_JJA_ftest.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/profile_comparison_stddev/zd/ftest/profile_comparison_zd_mean_JJA_ftest.png")
 
     graph.profile_comparison_ftest(
         "data/soundings/zd_DJF.txt",
@@ -2298,12 +1897,7 @@ def profile_comparison_ftest():
         title="F-test profila stvarnih vrijednosti i ERA5, Zadar, 2011. - 2020. DJF",
         season="DJF",
     )
-    plt.savefig(
-        "images/profile_comparison_stddev/zd/ftest/profile_comparison_zd_mean_DJF_ftest.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/profile_comparison_stddev/zd/ftest/profile_comparison_zd_mean_DJF_ftest.png")
 
     graph.profile_comparison_ftest(
         "data/soundings/zd_00.txt",
@@ -2312,12 +1906,7 @@ def profile_comparison_ftest():
         levels,
         title="F-test profila stvarnih vrijednosti i ERA5, Zadar 00 UTC, 2011. - 2020.",
     )
-    plt.savefig(
-        "images/profile_comparison_stddev/zd/ftest/profile_comparison_zd_00_ftest.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/profile_comparison_stddev/zd/ftest/profile_comparison_zd_00_ftest.png")
 
     graph.profile_comparison_ftest(
         "data/soundings/zd_00_JJA.txt",
@@ -2327,12 +1916,7 @@ def profile_comparison_ftest():
         title="F-test profila stvarnih vrijednosti i ERA5, Zadar 00 UTC, 2011. - 2020. JJA",
         season="JJA",
     )
-    plt.savefig(
-        "images/profile_comparison_stddev/zd/ftest/profile_comparison_zd_00_JJA_ftest.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/profile_comparison_stddev/zd/ftest/profile_comparison_zd_00_JJA_ftest.png")
 
     graph.profile_comparison_ftest(
         "data/soundings/zd_00_DJF.txt",
@@ -2342,12 +1926,7 @@ def profile_comparison_ftest():
         title="F-test profila stvarnih vrijednosti i ERA5, Zadar 00 UTC, 2011. - 2020. DJF",
         season="DJF",
     )
-    plt.savefig(
-        "images/profile_comparison_stddev/zd/ftest/profile_comparison_zd_00_DJF_ftest.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/profile_comparison_stddev/zd/ftest/profile_comparison_zd_00_DJF_ftest.png")
 
     graph.profile_comparison_ftest(
         "data/soundings/zd_12.txt",
@@ -2356,12 +1935,7 @@ def profile_comparison_ftest():
         levels,
         title="F-test profila stvarnih vrijednosti i ERA5, Zadar 12 UTC, 2011. - 2020.",
     )
-    plt.savefig(
-        "images/profile_comparison_stddev/zd/ftest/profile_comparison_zd_12_ftest.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/profile_comparison_stddev/zd/ftest/profile_comparison_zd_12_ftest.png")
 
     graph.profile_comparison_ftest(
         "data/soundings/zd_12_JJA.txt",
@@ -2371,12 +1945,7 @@ def profile_comparison_ftest():
         title="F-test profila stvarnih vrijednosti i ERA5, Zadar 12 UTC, 2011. - 2020. JJA",
         season="JJA",
     )
-    plt.savefig(
-        "images/profile_comparison_stddev/zd/ftest/profile_comparison_zd_12_JJA_ftest.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/profile_comparison_stddev/zd/ftest/profile_comparison_zd_12_JJA_ftest.png")
 
     graph.profile_comparison_ftest(
         "data/soundings/zd_12_DJF.txt",
@@ -2386,9 +1955,16 @@ def profile_comparison_ftest():
         title="F-test profila stvarnih vrijednosti i ERA5, Zadar 12 UTC, 2011. - 2020. DJF",
         season="DJF",
     )
-    plt.savefig(
-        "images/profile_comparison_stddev/zd/ftest/profile_comparison_zd_12_DJF_ftest.png",
-        facecolor="white",
-        transparent=False,
-    )
-    plt.close()
+    savefig("images/profile_comparison_stddev/zd/ftest/profile_comparison_zd_12_DJF_ftest.png")
+
+    plt.close("all")
+
+
+def sounding_data_availability():
+    graph.sounding_data_availability("./data/soundings/zg.txt", title="Sondažni podaci, Zagreb", city="zg")
+    savefig("images/sounding_data_availability/zg.png")
+
+    graph.sounding_data_availability("./data/soundings/zd.txt", title="Sondažni podaci, Zadar", city="zd")
+    savefig("images/sounding_data_availability/zd.png")
+
+    plt.close("all")
