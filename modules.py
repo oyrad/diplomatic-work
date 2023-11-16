@@ -1961,10 +1961,10 @@ def profile_comparison_ftest():
 
 
 def sounding_data_availability():
-    graph.sounding_data_availability("./data/soundings/zg.txt", title="Sondažni podaci, Zagreb", city="zg")
+    graph.sounding_data_availability("./data/soundings/zg.txt", title="Postotak sondažih podataka, Zagreb", city="zg")
     savefig("images/sounding_data_availability/zg.png")
 
-    graph.sounding_data_availability("./data/soundings/zd.txt", title="Sondažni podaci, Zadar", city="zd")
+    graph.sounding_data_availability("./data/soundings/zd.txt", title="Postotak sondažih podataka, Zadar", city="zd")
     savefig("images/sounding_data_availability/zd.png")
 
     plt.close("all")

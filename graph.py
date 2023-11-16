@@ -240,25 +240,16 @@ def profile_comparison_ftest(sondage_file, temp, rel, levels, title, season="non
         ax[i].invert_yaxis()
         ax[i].legend()
 
+import seaborn as sns
 
 def sounding_data_availability(sondage_file, title, city):
-    fig, ax = plt.subplots(1, 1, figsize=(15, 7))
-    date_list = []
+    monthly_data = fn.get_sounding_data_availability(sondage_file, city)
+    fig, ax = plt.subplots(1, 1, figsize=(15, 10))
 
-    for year in range(2011, 2022):
-        for month in range(1, 13):
-            date = datetime.date(year, month, 1)
-            date_list.append(date)
+    data_matrix = np.transpose(np.reshape(monthly_data, (10, 12)))
 
-    plt.gcf().autofmt_xdate()
-    x_values = np.arange(len(date_list) - 12)
+    sns.heatmap(data_matrix, cmap='BuGn', annot=True, fmt=".1f", xticklabels=np.arange(2011, 2021), yticklabels=np.arange(1, 13))
 
-    tick_indices = np.arange(0, len(date_list), 12)
-    ax.set_xticks(tick_indices)
-    ax.set_xticklabels([date_list[i].strftime("%Y") for i in tick_indices])
-
-    ax.set_ylabel("Postotak podataka", fontsize=label_size)
+    ax.set_ylabel("Mjesec", fontsize=label_size)
     ax.set_xlabel("Godina", fontsize=label_size)
     ax.set_title(title, fontsize=title_size)
-
-    ax.plot(x_values, fn.get_sounding_data_availability(sondage_file, city))
