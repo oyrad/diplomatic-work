@@ -114,10 +114,10 @@ def comparison(era5_temp, era5_rel, real_temp, real_rel):
     x_values = np.arange(len(date_list) - 12)
 
     fig, ax = plt.subplots(2, 1, figsize=(22, 16))
-    fig.suptitle(
-        "Usporedba stvarnih i ERA5 vrijednosti na 850 hPa, Zagreb, 2011. - 2020.",
-        fontsize=suptitle_size,
-    )
+    #fig.suptitle(
+    #    "Usporedba stvarnih i ERA5 vrijednosti na 850 hPa, Zagreb, 2011. - 2020.",
+    #    fontsize=suptitle_size,
+    #)
 
     ax[0].plot(x_values, real_temp, label="Radiosondaža")
     ax[0].plot(x_values, era5_temp_mean, label="ERA5")
@@ -149,7 +149,7 @@ def profile_comparison(sondage_file, temp, rel, levels, title, season="none"):
     era5_rel = fn.get_era5_values_by_level(rel, levels, season)
 
     fig, ax = plt.subplots(1, 2, figsize=(20, 12))
-    fig.suptitle(title, fontsize=suptitle_size)
+    #fig.suptitle(title, fontsize=suptitle_size)
 
     ax[0].semilogy(era5_temp, levels, label="ERA5")
     ax[0].semilogy(real_temp, levels, label="Radiosondaža")
