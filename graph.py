@@ -274,8 +274,8 @@ def sounding_data_availability(sondage_file, title, city):
 
     sns.heatmap(data_matrix, cmap='BuGn', annot=True, fmt=".1f", xticklabels=np.arange(2011, 2021), yticklabels=np.arange(1, 13))
 
-    for axis in ax:
-        axis.tick_params(axis='both', labelsize=tick_size)
+    plt.xticks(fontsize=tick_size)
+    plt.yticks(fontsize=tick_size)
 
     ax.set_ylabel("Mjesec", fontsize=label_size)
     ax.set_xlabel("Godina", fontsize=label_size)
