@@ -224,6 +224,9 @@ def profile_comparison_stddev(sondage_file, temp, rel, levels, title, season="no
     for axis in ax:
         axis.tick_params(axis='both', labelsize=tick_size)
 
+    ax[0].set_xlim(-3, 10)
+    ax[1].set_xlim(-3, 35)
+
     ax[0].semilogy(era5_temp, levels, label="ERA5")
     ax[0].semilogy(real_temp, levels, label="Radiosondaža")
     ax[0].set_xlabel(r"Temperatura [$^{\circ}$ C]", fontsize=label_size)
