@@ -5,8 +5,9 @@ import matplotlib.pyplot as plt
 
 suptitle_size = 20
 title_size = 15
-tick_size = 12
-label_size = 15
+tick_size = 14
+label_size = 18
+legend_size = "x-large"
 
 start_year = 1940
 end_year = 2023
@@ -29,8 +30,8 @@ def trend(temp, rel, spec, levels, title, season="none"):
     #ax[2].set_title("Specifična vlažnost", fontsize=title_size)
     ax[2].set_xlabel(r"Trend [gkg$^{-1}$ / 10 god]", fontsize=label_size)
 
-    plt.xticks(fontsize=tick_size)
-    plt.yticks(fontsize=tick_size)
+    for axis in ax:
+        axis.tick_params(axis='both', labelsize=tick_size)
 
     ax[0].set_xlim(-1.75, 0.5)
     ax[1].set_xlim(-1, 1)
@@ -44,14 +45,14 @@ def trend(temp, rel, spec, levels, title, season="none"):
 
 def ttest(temp, rel, spec, levels, title, season="none"):
     fig, ax = plt.subplots(1, 3, figsize=(20, 10))
-    fig.suptitle(title, fontsize=suptitle_size)
+    #fig.suptitle(title, fontsize=suptitle_size)
 
     ax[0].loglog(fn.get_ttest(temp, levels, season), levels)
     ax[1].loglog(fn.get_ttest(rel, levels, season), levels)
     ax[2].loglog(fn.get_ttest(spec, levels, season), levels)
 
-    plt.xticks(fontsize=tick_size)
-    plt.yticks(fontsize=tick_size)
+    for axis in ax:
+        axis.tick_params(axis='both', labelsize=tick_size)
 
     #ax[0].set_title("Temperatura", fontsize=title_size)
     #ax[1].set_title("Relativna vlažnost", fontsize=title_size)
@@ -63,7 +64,7 @@ def ttest(temp, rel, spec, levels, title, season="none"):
         ax[i].axvline(0.05, color="black", label=r"$\alpha = 0.05$")
         ax[i].set_xlabel("p-vrijednost", fontsize=label_size)
         ax[i].set_ylabel("Tlak [hPa]", fontsize=label_size)
-        ax[i].legend(fontsize='large')
+        ax[i].legend(fontsize=legend_size)
 
 
 def hovmoeller(values, levels, cmap_levels, cmap_label, title, season="none"):
@@ -131,11 +132,11 @@ def comparison(era5_temp, era5_rel, real_temp, real_rel):
 
     ax[0].plot(x_values, real_temp, label="Radiosondaža")
     ax[0].plot(x_values, era5_temp_mean, label="ERA5")
-    ax[0].legend(fontsize='large')
+    ax[0].legend(fontsize=legend_size)
 
     ax[1].plot(x_values, real_rel, label="Radiosondaža")
     ax[1].plot(x_values, era5_rel_mean, label="ERA5")
-    ax[1].legend(fontsize='large')
+    ax[1].legend(fontsize=legend_size)
 
     tick_indices = np.arange(0, len(date_list), 12)
     ax[0].set_xticks(tick_indices)
@@ -161,8 +162,8 @@ def profile_comparison(sondage_file, temp, rel, levels, title, season="none"):
     fig, ax = plt.subplots(1, 2, figsize=(20, 12))
     #fig.suptitle(title, fontsize=suptitle_size)
 
-    plt.xticks(fontsize=tick_size)
-    plt.yticks(fontsize=tick_size)
+    for axis in ax:
+        axis.tick_params(axis='both', labelsize=tick_size)
 
     ax[0].semilogy(era5_temp, levels, label="ERA5")
     ax[0].semilogy(real_temp, levels, label="Radiosondaža")
@@ -170,7 +171,7 @@ def profile_comparison(sondage_file, temp, rel, levels, title, season="none"):
     ax[0].set_ylabel("Tlak [hPa]", fontsize=label_size)
     #ax[0].set_title("Temperatura", fontsize=title_size)
     ax[0].invert_yaxis()
-    ax[0].legend(fontsize='large')
+    ax[0].legend(fontsize=legend_size)
 
     ax[1].semilogy(era5_rel, levels, label="ERA5")
     ax[1].semilogy(real_rel, levels, label="Radiosondaža")
@@ -178,7 +179,7 @@ def profile_comparison(sondage_file, temp, rel, levels, title, season="none"):
     ax[1].set_ylabel("Tlak [hPa]", fontsize=label_size)
     #ax[1].set_title("Relativna vlažnost", fontsize=title_size)
     ax[1].invert_yaxis()
-    ax[1].legend(fontsize='large')
+    ax[1].legend(fontsize=legend_size)
 
 
 def profile_comparison_ttest(sondage_file, temp, rel, levels, title, season="none"):
@@ -189,8 +190,8 @@ def profile_comparison_ttest(sondage_file, temp, rel, levels, title, season="non
     fig, ax = plt.subplots(1, 2, figsize=(20, 12))
     #fig.suptitle(title, fontsize=suptitle_size)
 
-    plt.xticks(fontsize=tick_size)
-    plt.yticks(fontsize=tick_size)
+    for axis in ax:
+        axis.tick_params(axis='both', labelsize=tick_size)
 
     ax[0].loglog(temp_pvalues, levels)
     ax[1].loglog(rel_pvalues, levels)
@@ -204,7 +205,7 @@ def profile_comparison_ttest(sondage_file, temp, rel, levels, title, season="non
         ax[i].axvline(0.05, color="black", label=r"$\alpha = 0.05$")
         ax[i].set_ylim(bottom=0.7)
         ax[i].invert_yaxis()
-        ax[i].legend(fontsize='large')
+        ax[i].legend(fontsize=legend_size)
 
 
 def profile_comparison_stddev(sondage_file, temp, rel, levels, title, season="none"):
@@ -217,8 +218,8 @@ def profile_comparison_stddev(sondage_file, temp, rel, levels, title, season="no
     fig, ax = plt.subplots(1, 2, figsize=(20, 12))
     #fig.suptitle(title, fontsize=suptitle_size)
 
-    plt.xticks(fontsize=tick_size)
-    plt.yticks(fontsize=tick_size)
+    for axis in ax:
+        axis.tick_params(axis='both', labelsize=tick_size)
 
     ax[0].semilogy(era5_temp, levels, label="ERA5")
     ax[0].semilogy(real_temp, levels, label="Radiosondaža")
@@ -226,7 +227,7 @@ def profile_comparison_stddev(sondage_file, temp, rel, levels, title, season="no
     ax[0].set_ylabel("Tlak [hPa]", fontsize=label_size)
     #ax[0].set_title("Temperatura", fontsize=title_size)
     ax[0].invert_yaxis()
-    ax[0].legend(fontsize='large')
+    ax[0].legend(fontsize=legend_size)
     ax[0].set_xlim(left=-0.5)
 
     ax[1].semilogy(era5_rel, levels, label="ERA5")
@@ -235,7 +236,7 @@ def profile_comparison_stddev(sondage_file, temp, rel, levels, title, season="no
     ax[1].set_ylabel("Tlak [hPa]", fontsize=label_size)
     #ax[1].set_title("Relativna vlažnost", fontsize=title_size)
     ax[1].invert_yaxis()
-    ax[1].legend(fontsize='large')
+    ax[1].legend(fontsize=legend_size)
 
 
 def profile_comparison_ftest(sondage_file, temp, rel, levels, title, season="none"):
@@ -249,8 +250,8 @@ def profile_comparison_ftest(sondage_file, temp, rel, levels, title, season="non
     ax[0].loglog(temp_pvalues, levels)
     ax[1].loglog(rel_pvalues, levels)
 
-    plt.xticks(fontsize=tick_size)
-    plt.yticks(fontsize=tick_size)
+    for axis in ax:
+        axis.tick_params(axis='both', labelsize=tick_size)
 
     #ax[0].set_title("Temperatura", fontsize=title_size)
     #ax[1].set_title("Relativna vlažnost", fontsize=title_size)
@@ -261,7 +262,7 @@ def profile_comparison_ftest(sondage_file, temp, rel, levels, title, season="non
         ax[i].axvline(0.05, color="black", label=r"$\alpha = 0.05$")
         ax[i].set_ylim(bottom=0.7)
         ax[i].invert_yaxis()
-        ax[i].legend(fontsize='large')
+        ax[i].legend(fontsize=legend_size)
 
 import seaborn as sns
 
@@ -273,8 +274,8 @@ def sounding_data_availability(sondage_file, title, city):
 
     sns.heatmap(data_matrix, cmap='BuGn', annot=True, fmt=".1f", xticklabels=np.arange(2011, 2021), yticklabels=np.arange(1, 13))
 
-    plt.xticks(fontsize=tick_size)
-    plt.yticks(fontsize=tick_size)
+    for axis in ax:
+        axis.tick_params(axis='both', labelsize=tick_size)
 
     ax.set_ylabel("Mjesec", fontsize=label_size)
     ax.set_xlabel("Godina", fontsize=label_size)
