@@ -219,7 +219,7 @@ def profile_comparison_ttest(sondage_file, temp, rel, levels, title, season="non
     for i in range(2):
         ax[i].set_ylabel("Tlak [hPa]", fontsize=label_size)
         ax[i].set_xlabel("p-vrijednost", fontsize=label_size)
-        ax[i].axvline(0.05, color="black", label=r"$\alpha = 0.05$")
+        ax[i].axvline(0.05, color="red", label=r"$\alpha = 0.05$")
         ax[i].set_ylim(bottom=0.7)
         ax[i].invert_yaxis()
         ax[i].set_yticks(pressure_ticks)
@@ -280,7 +280,7 @@ def profile_comparison_ftest(sondage_file, temp, rel, levels, title, season="non
     for i in range(2):
         ax[i].set_ylabel("Tlak [hPa]", fontsize=label_size)
         ax[i].set_xlabel("p-vrijednost", fontsize=label_size)
-        ax[i].axvline(0.05, color="black", label=r"$\alpha = 0.05$")
+        ax[i].axvline(0.05, color="red", label=r"$\alpha = 0.05$")
         ax[i].set_ylim(bottom=0.7)
         ax[i].invert_yaxis()
         ax[i].set_yticks(pressure_ticks)
