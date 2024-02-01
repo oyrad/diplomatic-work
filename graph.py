@@ -102,6 +102,8 @@ def hovmoeller(values, levels, cmap_levels, cmap_label, title, season="none"):
     ax.set_xticks(tick_indices)
     ax.set_xticklabels([date_list[i].strftime("%Y") for i in tick_indices])
 
+    ax.axhline(250, color="#777", linestyle="dashed")
+
     #ax.set_title(title, fontsize=title_size)
     ax.set_xlabel("Godina", fontsize=label_size)
     ax.set_ylabel("Tlak [hPa]", fontsize=label_size)
