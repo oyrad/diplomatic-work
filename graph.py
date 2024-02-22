@@ -14,6 +14,9 @@ legend_size = "xx-large"
 start_year = 1940
 end_year = 2023
 
+line_color = "#111"
+test_line_color = "#888"
+
 pressure_ticks = [1000, 700, 500, 300, 200, 100, 70, 50, 30, 20, 10, 7, 5, 3, 2, 1]
 
 def trend(temp, rel, spec, levels, title, season="none"):
@@ -21,9 +24,9 @@ def trend(temp, rel, spec, levels, title, season="none"):
     plt.subplots_adjust(left=0.055, right=0.975, bottom=0.085, top=0.975, wspace=0.275)
     #fig.suptitle(title, fontsize=suptitle_size)
 
-    ax[0].semilogy(fn.get_trend(temp, levels, season), levels)
-    ax[1].semilogy(fn.get_trend(rel, levels, season), levels)
-    ax[2].semilogy(fn.get_trend(spec, levels, season), levels)
+    ax[0].semilogy(fn.get_trend(temp, levels, season), levels, color=line_color)
+    ax[1].semilogy(fn.get_trend(rel, levels, season), levels, color=line_color)
+    ax[2].semilogy(fn.get_trend(spec, levels, season), levels, color=line_color)
 
     #ax[0].set_title("Temperatura", fontsize=title_size)
     ax[0].set_xlabel(r"Trend [$^{\circ}$C / 10 god]", fontsize=label_size)
@@ -56,9 +59,9 @@ def ttest(temp, rel, spec, levels, title, season="none"):
     plt.subplots_adjust(left=0.055, right=0.975, bottom=0.085, top=0.975, wspace=0.275)
     #fig.suptitle(title, fontsize=suptitle_size)
 
-    ax[0].loglog(fn.get_ttest(temp, levels, season), levels)
-    ax[1].loglog(fn.get_ttest(rel, levels, season), levels)
-    ax[2].loglog(fn.get_ttest(spec, levels, season), levels)
+    ax[0].loglog(fn.get_ttest(temp, levels, season), levels, color=line_color)
+    ax[1].loglog(fn.get_ttest(rel, levels, season), levels, color=line_color)
+    ax[2].loglog(fn.get_ttest(spec, levels, season), levels, color=line_color)
 
     for axis in ax:
         axis.tick_params(axis='both', labelsize=tick_size)
@@ -72,7 +75,7 @@ def ttest(temp, rel, spec, levels, title, season="none"):
         ax[i].invert_yaxis()
         ax[i].set_yticks(pressure_ticks)
         ax[i].get_yaxis().set_major_formatter(matplotlib.ticker.ScalarFormatter())
-        ax[i].axvline(0.05, color="red", label=r"$\alpha = 0.05$")
+        ax[i].axvline(0.05, color=test_line_color, label=r"$\alpha = 0.05$")
         ax[i].set_xlabel("p-vrijednost", fontsize=label_size)
         ax[i].set_ylabel("Tlak [hPa]", fontsize=label_size)
         ax[i].legend(fontsize=legend_size)
