@@ -215,8 +215,8 @@ def profile_comparison_ttest(sondage_file, temp, rel, levels, title, season="non
     for axis in ax:
         axis.tick_params(axis='both', labelsize=tick_size)
 
-    ax[0].loglog(temp_pvalues, levels)
-    ax[1].loglog(rel_pvalues, levels)
+    ax[0].loglog(temp_pvalues, levels, color=line_color)
+    ax[1].loglog(rel_pvalues, levels, color=line_color)
 
     #ax[0].set_title("Temperatura", fontsize=title_size)
     #ax[1].set_title("Relativna vlažnost", fontsize=title_size)
@@ -224,7 +224,7 @@ def profile_comparison_ttest(sondage_file, temp, rel, levels, title, season="non
     for i in range(2):
         ax[i].set_ylabel("Tlak [hPa]", fontsize=label_size)
         ax[i].set_xlabel("p-vrijednost", fontsize=label_size)
-        ax[i].axvline(0.05, color="red", label=r"$\alpha = 0.05$")
+        ax[i].axvline(0.05, color=test_line_color, label=r"$\alpha = 0.05$")
         ax[i].set_ylim(bottom=0.7)
         ax[i].invert_yaxis()
         ax[i].set_yticks(pressure_ticks)
@@ -273,8 +273,8 @@ def profile_comparison_ftest(sondage_file, temp, rel, levels, title, season="non
     fig, ax = plt.subplots(1, 2, figsize=(20, 12))
     plt.subplots_adjust(left=0.055, right=0.975, bottom=0.085, top=0.975, wspace=0.275)
 
-    ax[0].loglog(temp_pvalues, levels)
-    ax[1].loglog(rel_pvalues, levels)
+    ax[0].loglog(temp_pvalues, levels, color=line_color)
+    ax[1].loglog(rel_pvalues, levels, color=line_color)
 
     for axis in ax:
         axis.tick_params(axis='both', labelsize=tick_size)
@@ -285,7 +285,7 @@ def profile_comparison_ftest(sondage_file, temp, rel, levels, title, season="non
     for i in range(2):
         ax[i].set_ylabel("Tlak [hPa]", fontsize=label_size)
         ax[i].set_xlabel("p-vrijednost", fontsize=label_size)
-        ax[i].axvline(0.05, color="red", label=r"$\alpha = 0.05$")
+        ax[i].axvline(0.05, color=test_line_color, label=r"$\alpha = 0.05$")
         ax[i].set_ylim(bottom=0.7)
         ax[i].invert_yaxis()
         ax[i].set_yticks(pressure_ticks)
